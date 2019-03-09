@@ -1,5 +1,5 @@
-process.env.BABEL_ENV = 'production';
-process.env.NODE_ENV = 'production';
+process.env.BABEL_ENV = 'development';
+process.env.NODE_ENV = 'development';
 
 const webpack = require("webpack");
 const webpackConfig = require( '../config/webpack.config' );
