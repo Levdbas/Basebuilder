@@ -16,8 +16,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const merge = require("webpack-merge");
 const rootPath = process.cwd();
 
-var configFile = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
-const overWrite = require(path.resolve(__dirname, rootPath) + '/assets/buid/webpack.overwrites.js');
+const configFile = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
+const overWriteConfig = require(path.resolve(__dirname, rootPath) + '/assets/build/webpack.overwrites.js');
 
 const variables = {
     browserSyncURL: configFile['browserSyncURL'],
@@ -27,7 +27,7 @@ const variables = {
     distPath: path.join(rootPath, configFile['themePath'], 'dist'), // from root folder path/to/theme
     assetsPath: path.join(rootPath, configFile['assetsPath']), // from root folder path/to/assets
 };
-const webpackConfig = {
+const baseConfig = {
     context: variables.assetsPath,
     entry: {
         app: ['./scripts/app.js', './styles/app.scss'],
@@ -110,8 +110,8 @@ const webpackConfig = {
             filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
         }),
         new webpack.ProvidePlugin({
-            $: 'jquery/dist/jquery.slim.js',
-            jQuery: 'jquery/dist/jquery.slim.js',
+            $: 'jquery/dist/jquery.js',
+            jQuery: 'jquery/dist/jquery.js',
             Popper: 'popper.js/dist/umd/popper.js',
             Alert: 'exports-loader?Alert!bootstrap/js/dist/alert',
             Button: 'exports-loader?Button!bootstrap/js/dist/button.js',
@@ -187,11 +187,16 @@ const webpackConfig = {
     },
 };
 if (process.env.NODE_ENV === 'production') {
-    webpackConfig.plugins.push(
+    baseConfig.plugins.push(
         new CleanWebpackPlugin(variables.distPath, {
             root: rootPath,
             verbose: false,
         })
     );
 }
-module.exports = webpackConfig;
+mergedConfig = merge.strategy(
+  {
+    entry: 'replace', // or 'replace', defaults to 'append'
+  }
+)(baseConfig, overWriteConfig);
+module.exports = mergedConfig
