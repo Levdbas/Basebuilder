@@ -13,9 +13,11 @@ const imageminOptipng = require('imagemin-optipng');
 const imageminSvgo = require('imagemin-svgo');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const merge = require("webpack-merge");
 const rootPath = process.cwd();
-var configFile = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
 
+var configFile = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
+const overWrite = require(path.resolve(__dirname, rootPath) + '/assets/buid/webpack.overwrites.js');
 
 const variables = {
     browserSyncURL: configFile['browserSyncURL'],
