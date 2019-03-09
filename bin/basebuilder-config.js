@@ -6,7 +6,7 @@ const updateNotifier = require( 'update-notifier' );
 const pkg = require( '../package.json' );
 updateNotifier( { pkg } ).notify();
 
-//const spawn = require( 'cgb-dev-utils/crossSpawn' );
+const spawn = require( '../crossSpawn' );
 const args = process.argv.slice( 2 );
 
 const scriptIndex = args.findIndex(
@@ -19,12 +19,38 @@ const nodeArgs = scriptIndex > 0 ? args.slice( 0, scriptIndex ) : [];
 switch ( script ) {
 	case 'production':
 	case 'development':
-	case 'watch':
+	case 'watch':{
+		const result = spawn.sync(
+			'node',
+			nodeArgs
+				.concat( require.resolve( '../scripts/' + script ) )
+				.concat( args.slice( scriptIndex + 1 ) ),
+			{ stdio: 'inherit' }
+		);
+		if ( result.signal ) {
+			if ( result.signal === 'SIGKILL' ) {
+				console.log(
+					'The build failed because the process exited too early. ' +
+						'This probably means the system ran out of memory or someone called ' +
+						'`kill -9` on the process.'
+				);
+			} else if ( result.signal === 'SIGTERM' ) {
+				console.log(
+					'The build failed because the process exited too early. ' +
+						'Someone might have called `kill` or `killall`, or the system could ' +
+						'be shutting down.'
+				);
+			}
+			process.exit( 1 );
+		}
+		process.exit( result.status );
+		break;
+}
 	default:
 		console.log( 'Unknown script "' + script + '".' );
-		console.log( 'Perhaps you need to update BaseBuider?' );
+		console.log( 'Perhaps you need to update cgb-scripts?' );
 		console.log(
-			'Update via: yarn add basebuilder-config'
+			'Update via: npm install -g create-guten-block or npm install cgb-scripts'
 		);
 		break;
 }
