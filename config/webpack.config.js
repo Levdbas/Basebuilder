@@ -65,7 +65,7 @@ const webpackConfig = {
                         loader: 'postcss-loader',
                         options: {
                             config: {
-                                path: __dirname + '/postcss.config.js',
+                                path: __dirname + '/config/postcss.config.js',
                             },
                         },
                     },
