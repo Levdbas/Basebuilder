@@ -48,9 +48,9 @@ switch ( script ) {
 }
 	default:
 		console.log( 'Unknown script "' + script + '".' );
-		console.log( 'Perhaps you need to update cgb-scripts?' );
+		console.log( 'Perhaps you need to update basebuilder-config?' );
 		console.log(
-			'Update via: npm install -g create-guten-block or npm install cgb-scripts'
+			'Update via: yarn add basebuilder-config?'
 		);
 		break;
 }

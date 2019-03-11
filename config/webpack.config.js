@@ -194,9 +194,9 @@ if (process.env.NODE_ENV === 'production') {
         })
     );
 }
-mergedConfig = merge.strategy(
+baseConfig = merge.strategy(
   {
     entry: 'replace', // or 'replace', defaults to 'append'
   }
 )(baseConfig, overWriteConfig);
-module.exports = mergedConfig
+module.exports = baseConfig
