@@ -1,7 +1,8 @@
+process.noDeprecation = true;
 const env = process.env.NODE_ENV;
 const devMode = process.env.NODE_ENV !== 'production';
 const path = require('path');
-const webpack = require("webpack");
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
@@ -13,27 +14,26 @@ const imageminOptipng = require('imagemin-optipng');
 const imageminSvgo = require('imagemin-svgo');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const merge = require("webpack-merge");
+const merge = require('webpack-merge');
 const rootPath = process.cwd();
 
-const configFile = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
-const overWriteConfig = require(path.resolve(__dirname, rootPath) + '/assets/build/webpack.overwrites.js');
+var userConfig = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
 
-const variables = {
-    browserSyncURL: configFile['browserSyncURL'],
-    browserSyncPort: configFile['browserSyncPort'],
-    sourceMaps: configFile['sourceMaps'],
-    themePath: path.join(rootPath, configFile['themePath']), // from root folder path/to/theme
-    distPath: path.join(rootPath, configFile['themePath'], 'dist'), // from root folder path/to/theme
-    assetsPath: path.join(rootPath, configFile['assetsPath']), // from root folder path/to/assets
-};
-const baseConfig = {
-    context: variables.assetsPath,
-    entry: {
-        app: ['./scripts/app.js', './styles/app.scss'],
-        gutenberg: ['./scripts/gutenberg.js', './styles/gutenberg.scss'],
+const config = merge(
+    {
+        path: {
+            theme: path.join(rootPath, userConfig['themePath']), // from root folder path/to/theme
+            dist: path.join(rootPath, userConfig['themePath'], 'dist'), // from root folder path/to/theme
+            assets: path.join(rootPath, userConfig['assetsPath']), // from root folder path/to/assets
+        },
     },
-    devtool: variables.sourceMaps ? 'cheap-module-eval-source-map' : false,
+    userConfig
+);
+
+const webpackConfig = {
+    context: config.path.assets,
+    entry: config.entry,
+    devtool: config.sourceMaps ? 'source-map' : false,
     module: {
         rules: [
             {
@@ -60,28 +60,28 @@ const baseConfig = {
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: variables.sourceMaps,
+                            sourceMap: config.sourceMaps,
                         },
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
                             config: {
-                                path: __dirname + '/config/postcss.config.js',
+                                path: __dirname + '/postcss.config.js',
                             },
                         },
                     },
                     {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: variables.sourceMaps,
+                            sourceMap: config.sourceMaps,
                         },
                     },
                 ],
             },
             {
                 test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
-                include: variables.assetsPath,
+                include: config.path.assets,
                 loader: 'url-loader',
                 options: {
                     limit: 4096,
@@ -92,20 +92,15 @@ const baseConfig = {
     },
     output: {
         filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[hash].js',
-        path: path.resolve(__dirname, variables.distPath),
+        path: path.resolve(__dirname, config.path.dist),
         pathinfo: false,
     },
     plugins: [
-        new BrowserSyncPlugin(
-            {
-                host: 'localhost',
-                proxy: variables.browserSyncURL,
-                files: [variables.themePath + '/**/*.php'],
-            },
-            {
-                injectCss: true,
-            }
-        ),
+        new BrowserSyncPlugin({
+            host: 'localhost',
+            proxy: config.browserSyncURL,
+            files: [config.path.theme + '/**/*.php', config.path.theme + '/**/*.twig'],
+        }),
         new MiniCssExtractPlugin({
             filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
         }),
@@ -128,7 +123,7 @@ const baseConfig = {
         new CopyWebpackPlugin(
             [
                 {
-                    context: variables.assetsPath + '/images',
+                    context: config.path.assets + '/images',
                     from: '**/*',
                     to: devMode ? 'images/[path][name].[ext]' : 'images/[path][name].[hash].[ext]',
                 },
@@ -158,7 +153,7 @@ const baseConfig = {
             new TerserPlugin({
                 cache: true,
                 parallel: true,
-                sourceMap: variables.sourceMaps,
+                sourceMap: config.sourceMaps,
             }),
             new ImageminPlugin({
                 bail: false, // Ignore errors on corrupted images
@@ -187,16 +182,6 @@ const baseConfig = {
     },
 };
 if (process.env.NODE_ENV === 'production') {
-    baseConfig.plugins.push(
-        new CleanWebpackPlugin(variables.distPath, {
-            root: rootPath,
-            verbose: false,
-        })
-    );
+    webpackConfig.plugins.push(new CleanWebpackPlugin());
 }
-baseConfig = merge.strategy(
-  {
-    entry: 'replace', // or 'replace', defaults to 'append'
-  }
-)(baseConfig, overWriteConfig);
-module.exports = baseConfig
+module.exports = webpackConfig;
