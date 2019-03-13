@@ -1,0 +1,10 @@
+{
+    "entry": {
+        "app": ["./scripts/app.js", "./styles/app.scss"],
+        "gutenberg": ["./scripts/gutenberg.js", "./styles/gutenberg.scss"]
+    },
+    "sourceMaps": false,
+    "themePath": "web/app/themes/YOURTHEMENAME",
+    "assetsPath": "assets",
+    "browserSyncURL": "example.local"
+}
