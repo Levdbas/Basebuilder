@@ -1,6 +1,7 @@
 # BaseBuilder
 
 BaseBuilder is a Webpack config in the form of an NPM module that can handle most WP projects.
+Works best in combination with [BasePlate](https://github.com/Levdbas/BasePlate "Check out BasePlate") WP starter theme
 
 ## How to install
 
@@ -24,3 +25,22 @@ yarn add basebuilder-config
 ```
 
 ### 4. Make sure the following file exist: ```resources/assets/config.json```
+
+An example config file is located in ```node_modules/basebuilder-config/config.json```
+
+## How to eject
+
+We'll probably make an eject script in the future. For now. Do the following steps:
+
+1. add packages from ```basebuilder-config/package.json``` to your own ```package.json```.
+
+2. add the following scripts to your ```package.json```.
+```json
+    "scripts": {
+        "dev": "npm run development",
+        "development": "NODE_ENV=development webpack --mode development --config assets/build/webpack.config.js",
+        "watch": "NODE_ENV=development webpack --mode development --watch --config assets/build/webpack.config.js",
+        "production": "NODE_ENV=production webpack --mode production --config assets/build/webpack.config.js"
+    },
+```
+3. copy ```basebuilder-config/build``` folder to your projects assets folder in the project root.
