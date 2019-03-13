@@ -1,6 +1,6 @@
 process.noDeprecation = true;
 const env = process.env.NODE_ENV;
-const devMode = process.env.NODE_ENV !== 'production';
+const devMode = env !== 'production';
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -34,6 +34,7 @@ const webpackConfig = {
     context: config.path.assets,
     entry: config.entry,
     devtool: config.sourceMaps ? 'source-map' : false,
+    mode: env,
     module: {
         rules: [
             {
@@ -55,6 +56,7 @@ const webpackConfig = {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             publicPath: '../',
+                            sourceMap: config.sourceMaps,
                         },
                     },
                     {
@@ -66,6 +68,7 @@ const webpackConfig = {
                     {
                         loader: 'postcss-loader',
                         options: {
+                            sourceMap: config.sourceMaps,
                             config: {
                                 path: __dirname + '/postcss.config.js',
                             },
@@ -95,6 +98,7 @@ const webpackConfig = {
         path: path.resolve(__dirname, config.path.dist),
         pathinfo: false,
     },
+    performance: { hints: false },
     plugins: [
         new BrowserSyncPlugin({
             host: 'localhost',
