@@ -2,9 +2,19 @@
 'use strict';
 
 // Update notifier.
+const chalk = require( 'chalk' );
 const updateNotifier = require( 'update-notifier' );
 const pkg = require( '../package.json' );
-updateNotifier( { pkg } ).notify();
+
+const notifier = updateNotifier({
+	pkg,
+	shouldNotifyInNpmScript: true,
+});
+
+notifier.notify({
+	message: 'Update available ' + chalk.dim(notifier.update.current) + chalk.reset(' → ') +
+chalk.green(notifier.update.latest) + ' \nRun ' + chalk.cyan('yarn add ') + notifier.packageName + ' to update'
+});
 
 const spawn = require( '../crossSpawn' );
 const args = process.argv.slice( 2 );
