@@ -5,15 +5,24 @@
 const chalk = require( 'chalk' );
 const updateNotifier = require( 'update-notifier' );
 const pkg = require( '../package.json' );
-
+var current = '';
+var latest = '';
+var packageName = '';
 const notifier = updateNotifier({
 	pkg,
-	shouldNotifyInNpmScript: true,
+	shouldNotifyInNpmScript: true
 });
 
-notifier.notify({
-	message: 'Update available ' + chalk.dim(notifier.update.current) + chalk.reset(' → ') +
-chalk.green(notifier.update.latest) + ' \nRun ' + chalk.cyan('yarn add ') + notifier.packageName + ' to update'
+if(notifier.update !== undefined){
+	current = notifier.update.current;
+	latest = notifier.update.latest;
+	packageName = notifier.packageName;
+}
+
+notifier.notify(
+	{
+	message: 'Update available ' + chalk.dim(current) + chalk.reset(' → ') +
+	chalk.green(latest) + ' \nRun ' + chalk.cyan('yarn add ') + packageName + ' to update'
 });
 
 const spawn = require( '../crossSpawn' );
