@@ -1,13 +1,11 @@
 {
   "name": "basebuilder-config",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "description": "Config and build scripts for BasePlate",
   "main": "index.js",
   "author": "Erik van der Bas",
   "license": "MIT",
-  "bin": {
-    "basebuilder-config": "./bin/basebuilder-config.js"
-  },
+  "bin": "./bin/basebuilder-config.js",
   "dependencies": {
     "@babel/core": "^7.4",
     "@babel/preset-env": "^7.4",
