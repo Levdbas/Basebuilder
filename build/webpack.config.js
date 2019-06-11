@@ -1,6 +1,10 @@
+/**
+ * Assets Config file
+ */
 process.noDeprecation = true;
 const env = process.env.NODE_ENV;
-const devMode = env !== 'production';
+const devMode = process.env.NODE_ENV !== 'production';
+const watchMode = global.watch || false;
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -15,26 +19,23 @@ const imageminSvgo = require('imagemin-svgo');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
-const rootPath = process.cwd();
 
-var userConfig = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
-
-const config = merge(
-    {
-        path: {
-            theme: path.join(rootPath, userConfig['themePath']), // from root folder path/to/theme
-            dist: path.join(rootPath, userConfig['themePath'], 'dist'), // from root folder path/to/theme
-            assets: path.join(rootPath, userConfig['assetsPath']), // from root folder path/to/assets
-        },
-    },
-    userConfig
-);
+const config = require('../config');
 
 const webpackConfig = {
+    mode: env,
     context: config.path.assets,
     entry: config.entry,
     devtool: config.sourceMaps ? 'source-map' : false,
-    mode: env,
+    watch: watchMode,
+    output: {
+        filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[hash].js',
+        chunkFilename: devMode ? 'scripts/[name].bundle.js' : 'scripts/[name].bundle.[hash].js',
+        path: config.path.dist,
+        publicPath: config.path.public,
+        pathinfo: false,
+    },
+    performance: { hints: false },
     module: {
         rules: [
             {
@@ -56,6 +57,7 @@ const webpackConfig = {
                         options: {
                             publicPath: '../',
                             sourceMap: config.sourceMaps,
+                            hmr: watchMode,
                         },
                     },
                     {
@@ -92,24 +94,11 @@ const webpackConfig = {
             },
         ],
     },
-    output: {
-        filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[hash].js',
-        path: path.resolve(__dirname, config.path.dist),
-        pathinfo: false,
-    },
-    performance: { hints: false },
     plugins: [
-        new BrowserSyncPlugin({
-            host: 'localhost',
-            proxy: config.browserSyncURL,
-            files: [config.path.theme + '/**/*.php', config.path.theme + '/**/**/*.php', config.path.theme + '/**/*.twig'],
-        }),
-        new MiniCssExtractPlugin({
-            filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
-        }),
         new webpack.ProvidePlugin({
-            $: 'jquery/dist/jquery.js',
-            jQuery: 'jquery/dist/jquery.js',
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
             Popper: 'popper.js/dist/umd/popper.js',
             Alert: 'exports-loader?Alert!bootstrap/js/dist/alert',
             Button: 'exports-loader?Button!bootstrap/js/dist/button.js',
@@ -123,6 +112,9 @@ const webpackConfig = {
             Tooltip: 'exports-loader?Tooltip!bootstrap/js/dist/tooltip.js',
             Util: 'exports-loader?Util!bootstrap/js/dist/util.js',
         }),
+        new MiniCssExtractPlugin({
+            filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
+        }),
         new CopyWebpackPlugin(
             [
                 {
@@ -134,9 +126,10 @@ const webpackConfig = {
             {
                 ignore: ['.gitkeep'],
                 copyUnmodified: true,
-            }
+            },
         ),
         new ManifestPlugin({
+            publicPath: '',
             map: file => {
                 if (process.env.NODE_ENV === 'production') {
                     // Remove hash in manifest key
@@ -158,33 +151,55 @@ const webpackConfig = {
                 parallel: true,
                 sourceMap: config.sourceMaps,
             }),
-            new ImageminPlugin({
-                bail: false, // Ignore errors on corrupted images
-                cache: true,
-                name: '[path][name].[ext]',
-                imageminOptions: {
-                    // Lossless optimization with custom option
-                    // Feel free to experement with options for better result for you
-                    plugins: [
-                        imageminGifsicle({
-                            interlaced: true,
-                        }),
-                        imageminJpegtran({
-                            progressive: true,
-                        }),
-                        imageminOptipng({
-                            optimizationLevel: 1,
-                        }),
-                        imageminSvgo({
-                            removeViewBox: false,
-                        }),
-                    ],
-                },
-            }),
         ],
     },
 };
-if (process.env.NODE_ENV === 'production') {
-    webpackConfig.plugins.push(new CleanWebpackPlugin());
+
+/**
+ * Development mode specific plugins.
+ *
+ * Running in both watch and dev mode.
+ *
+ * @since 1.4
+ * @param  {boolean} devMode if development mode is enabled in Webpack
+ * @return {object}           updated webpackConfig configuration object.
+ */
+if (devMode) {
+    webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
+/**
+ * Production mode specific plugins.
+ * @since 1.4
+ * @param  {boolean} devMode if development mode is enabled in Webpack
+ * @return {object}           updated webpackConfig configuration object.
+ */
+if (!devMode) {
+    webpackConfig.plugins.push(
+        new CleanWebpackPlugin(),
+        new ImageminPlugin({
+            bail: false, // Ignore errors on corrupted images
+            cache: true,
+            name: '[path][name].[ext]',
+            imageminOptions: {
+                // Lossless optimization with custom option
+                // Feel free to experement with options for better result for you
+                plugins: [
+                    imageminGifsicle({
+                        interlaced: true,
+                    }),
+                    imageminJpegtran({
+                        progressive: true,
+                    }),
+                    imageminOptipng({
+                        optimizationLevel: 1,
+                    }),
+                    imageminSvgo({
+                        removeViewBox: false,
+                    }),
+                ],
+            },
+        }),
+    );
 }
 module.exports = webpackConfig;
