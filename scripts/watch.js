@@ -2,16 +2,16 @@ process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 global.watch = true;
 
-const webpack = require("webpack");
+const webpack = require('webpack');
 const browserSync = require('browser-sync').create();
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const formatMessages = require('webpack-format-messages');
-const chalk = require( 'chalk' );
+const chalk = require('chalk');
 
-const webpackConfig = require( '../build/webpack.config' );
-const fileSize = require( '../fileSize' );
-const compiler = webpack( webpackConfig );
+const webpackConfig = require('../build/webpack.config');
+const fileSize = require('../fileSize');
+const compiler = webpack(webpackConfig);
 const config = require('../config');
 
 browserSync.init({
