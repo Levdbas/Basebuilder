@@ -21,12 +21,13 @@ const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
 
 const config = require('../config');
+const CreateSourceMap = devMode ? config.sourceMaps : false;
 
 const webpackConfig = {
 	mode: env,
 	context: config.path.assets,
 	entry: config.entry,
-	devtool: config.sourceMaps ? 'source-map' : false,
+	devtool: CreateSourceMap ? 'source-map' : false,
 	watch: watchMode,
 	output: {
 		filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[hash].js',
@@ -56,20 +57,20 @@ const webpackConfig = {
 						loader: MiniCssExtractPlugin.loader,
 						options: {
 							publicPath: '../',
-							sourceMap: config.sourceMaps,
+							sourceMap: CreateSourceMap,
 							hmr: watchMode,
 						},
 					},
 					{
 						loader: 'css-loader',
 						options: {
-							sourceMap: config.sourceMaps,
+							sourceMap: CreateSourceMap,
 						},
 					},
 					{
 						loader: 'postcss-loader',
 						options: {
-							sourceMap: config.sourceMaps,
+							sourceMap: CreateSourceMap,
 							config: {
 								path: __dirname + '/postcss.config.js',
 							},
@@ -78,7 +79,7 @@ const webpackConfig = {
 					{
 						loader: 'sass-loader',
 						options: {
-							sourceMap: config.sourceMaps,
+							sourceMap: CreateSourceMap,
 						},
 					},
 				],
@@ -154,7 +155,7 @@ const webpackConfig = {
 			new TerserPlugin({
 				cache: true,
 				parallel: true,
-				sourceMap: config.sourceMaps,
+				sourceMap: CreateSourceMap,
 			}),
 		],
 	},
