@@ -18,6 +18,7 @@ const imageminSvgo = require('imagemin-svgo');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const config = require('../config');
 const CreateSourceMap = devMode ? config.sourceMaps : false;
@@ -121,6 +122,7 @@ const webpackConfig = {
             Tooltip: 'exports-loader?Tooltip!bootstrap/js/dist/tooltip.js',
             Util: 'exports-loader?Util!bootstrap/js/dist/util.js',
         }),
+        new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
         }),
