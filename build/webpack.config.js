@@ -49,6 +49,10 @@ const webpackConfig = {
                 },
             },
             {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+            },
+            {
                 test: /\.scss$/,
                 exclude: /node_modules/,
                 use: [
