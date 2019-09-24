@@ -137,11 +137,14 @@ const webpackConfig = {
 			],
 			{
 				ignore: ['.gitkeep'],
-				copyUnmodified: true,
 			},
 		),
 		new ManifestPlugin({
 			publicPath: '',
+			seed: {
+				paths: {},
+				entries: {},
+			},
 			map: file => {
 				if (!devMode) {
 					// Remove hash in manifest key
