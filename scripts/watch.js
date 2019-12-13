@@ -17,7 +17,7 @@ const config = require('../config');
 browserSync.init({
 	files: [
 		{
-			match: [config.path.theme + '/**/*.php', config.path.theme + '/**/**/*.php', config.path.theme + '/**/*.twig'],
+			match: [config.path.theme + '/**/**/**/*.php', config.path.theme + '/**/**/**/*.twig'],
 		},
 	],
 	proxy: {
