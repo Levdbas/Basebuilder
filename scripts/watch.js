@@ -15,11 +15,7 @@ const compiler = webpack(webpackConfig);
 const config = require('../config');
 
 browserSync.init({
-	files: [
-		{
-			match: [config.path.theme + '/**/**/**/*.php', config.path.theme + '/**/**/**/*.twig'],
-		},
-	],
+	files: [config.path.theme + '/**/**/**/*.php', config.path.theme + '/resources/views/**/*.twig', './**/*.php', './resources/views/**/*.twig'],
 	proxy: {
 		target: config.browserSyncURL,
 		middleware: [
