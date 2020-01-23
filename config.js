@@ -2,7 +2,13 @@ const path = require('path');
 const rootPath = process.cwd();
 const merge = require('webpack-merge');
 const watchMode = global.watch || false;
-var userConfig = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
+
+if (process.env.npm_package_config_userConfig) {
+	var userConfigPath = process.env.npm_package_config_userConfig;
+	var userConfig = require(path.resolve(__dirname, rootPath) + userConfigPath);
+} else {
+	var userConfig = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
+}
 
 var themeURLPath = userConfig['themePath'].replace('/web/', '');
 var config = merge(

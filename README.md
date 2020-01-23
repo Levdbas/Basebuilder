@@ -47,6 +47,15 @@ We'll probably make an eject script in the future. For now. Do the following ste
 
 3. copy `basebuilder-config/build` folder to your projects assets folder in the project root.
 
-## Working with HMR
+## Overwrite config.json file location
 
-todo
+Normally BaseBuilder checks for the config.json in the assets folder in the root of the project dir.
+If you want to overwrite it you can set
+
+```json
+   "config": {
+        "userConfig": "/web/app/themes/lemon2020/resources/assets/config.json"
+    },
+```
+
+in the package.json.
