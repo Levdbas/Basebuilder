@@ -5,6 +5,7 @@
     },
     "sourceMaps": false,
     "themePath": "web/app/themes/YOURTHEMENAME",
+    "rootToThemePath": "/app/themes/YOURTHEMENAME",
     "assetsPath": "assets",
     "browserSyncURL": "example.local"
 }

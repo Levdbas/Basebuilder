@@ -54,8 +54,39 @@ If you want to overwrite it you can set
 
 ```json
    "config": {
-        "userConfig": "/web/app/themes/lemon2020/resources/assets/config.json"
+        "userConfig": "/web/app/themes/yourtheme/resources/assets/config.json"
     },
 ```
 
 in the package.json.
+
+## Changelog starting at 0.5
+
+### 0.6.2
+
+-   Update config to work with package.json in root of project and in theme folder.
+-   Starting changelog in readme.md
+-   Dependency update
+
+### 0.6.1
+
+-   Update watch locations for browsersync
+
+### 0.6.0
+
+-   New: option to overwrite theme path in the package.json
+-   Fixing line endings
+-   Readme update
+
+### 0.5.2
+
+-   Fix: change line endings to work with linux/mac.
+
+### 0.5.1
+
+-   Package bump
+-   Update watch locations for browsersync
+
+### 0.5.0
+
+-   Update to the way HMR packages are located.
