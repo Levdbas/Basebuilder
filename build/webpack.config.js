@@ -55,7 +55,7 @@ const webpackConfig = {
 			},
 			{
 				test: /\.scss$/,
-				exclude: /node_modules/,
+				exclude: /node_modules[\/\\](?!(swiper|dom7)[\/\\])/,
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,

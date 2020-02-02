@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "0.6.2",
+    "version": "0.6.3",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
@@ -16,6 +16,7 @@
         "chalk": "^3.0.0",
         "clean-webpack-plugin": "^3.0",
         "copy-webpack-plugin": "^5.1",
+        "core-js": "^3.6.4",
         "cross-env": "^6.0",
         "css-loader": "^3.4",
         "cssnano": "^4.1.10",

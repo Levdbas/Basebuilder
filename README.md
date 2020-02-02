@@ -62,6 +62,11 @@ in the package.json.
 
 ## Changelog starting at 0.5
 
+### 0.6.3
+
+-   Transpile Swiper and DOM7
+-   Add Core js for polyfills
+
 ### 0.6.2
 
 -   Update config to work with package.json in root of project and in theme folder.
