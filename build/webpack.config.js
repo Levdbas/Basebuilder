@@ -41,7 +41,7 @@ const webpackConfig = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules/,
+				exclude: /node_modules[\/\\](?!(swiper|dom7)[\/\\])/,
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -55,7 +55,7 @@ const webpackConfig = {
 			},
 			{
 				test: /\.scss$/,
-				exclude: /node_modules[\/\\](?!(swiper|dom7)[\/\\])/,
+				exclude: /node_modules/,
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
