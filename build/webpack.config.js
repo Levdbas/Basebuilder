@@ -159,6 +159,11 @@ const webpackConfig = {
 			chunks: 'all',
 			automaticNameDelimiter: '-',
 			name: 'vendor',
+			terserOptions: {
+				output: {
+					comments: false,
+				},
+			},
 		},
 		minimizer: [
 			new TerserPlugin({
