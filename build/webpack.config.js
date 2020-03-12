@@ -19,7 +19,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const merge = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-
+const PalettePlugin = require('palette-webpack-plugin');
 const config = require('../config');
 const CreateSourceMap = devMode ? config.sourceMaps : false;
 
@@ -143,6 +143,18 @@ const webpackConfig = {
 				ignore: ['.gitkeep'],
 			},
 		),
+
+		new PalettePlugin({
+			output: 'palette.json',
+			blacklist: ['transparent', 'inherit'],
+			pretty: false,
+			sass: {
+				path: 'resources/assets/styles/1_common',
+				files: ['_variables.scss'],
+				variables: ['colors'],
+			},
+		}),
+
 		new ManifestPlugin({
 			publicPath: '',
 			seed: {
