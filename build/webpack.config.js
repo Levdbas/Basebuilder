@@ -163,17 +163,17 @@ const webpackConfig = {
 			chunks: 'all',
 			automaticNameDelimiter: '-',
 			name: 'vendor',
-			terserOptions: {
-				output: {
-					comments: false,
-				},
-			},
 		},
 		minimizer: [
 			new TerserPlugin({
 				cache: true,
 				parallel: true,
 				sourceMap: CreateSourceMap,
+				terserOptions: {
+					output: {
+						comments: false,
+					},
+				},
 			}),
 		],
 	},
