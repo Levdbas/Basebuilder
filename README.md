@@ -62,6 +62,22 @@ in the package.json.
 
 ## Changelog starting at 0.5
 
+### 0.7.1
+
+-   dependency bump
+-   increased max_old_space_size in node
+
+### 0.7.0
+
+-   remove js comments while minimizing
+-   master/child support for specific project
+-   adding color palette plugin
+-   dependency bump
+
+### 0.6.4
+
+-   fixed the ability to transform swiper/dom7
+
 ### 0.6.3
 
 -   Transpile Swiper and DOM7
