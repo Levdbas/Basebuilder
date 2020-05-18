@@ -122,8 +122,7 @@ const webpackConfig = {
 		new CopyWebpackPlugin({
 			patterns: [
 				{
-					context: config.path.assets + '/images',
-					from: '**/*',
+					from: config.path.assets + '/images',
 					to: devMode ? 'images/[path][name].[ext]' : 'images/[path][name].[contenthash].[ext]',
 					globOptions: {
 						ignore: ['.gitkeep'],
