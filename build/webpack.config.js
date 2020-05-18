@@ -119,18 +119,18 @@ const webpackConfig = {
 		new MiniCssExtractPlugin({
 			filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
 		}),
-		new CopyWebpackPlugin(
-			[
+		new CopyWebpackPlugin({
+			patterns: [
 				{
 					context: config.path.assets + '/images',
 					from: '**/*',
 					to: devMode ? 'images/[path][name].[ext]' : 'images/[path][name].[contenthash].[ext]',
+					globOptions: {
+						ignore: ['.gitkeep'],
+					},
 				},
 			],
-			{
-				ignore: ['.gitkeep'],
-			},
-		),
+		}),
 
 		new PalettePlugin({
 			output: 'palette.json',
