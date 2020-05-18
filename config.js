@@ -20,6 +20,7 @@ if (userConfig['rootToThemePath']) {
 }
 
 var themePath = '/';
+
 if (userConfig['themePath']) {
 	var themePath = userConfig['themePath'];
 }
@@ -28,7 +29,6 @@ var config = merge(
 	{
 		path: {
 			theme: path.join(rootPath, themePath), // from root folder path/to/theme
-			masterThemeAssets: path.join(rootPath, '../wp-lemon/resources/assets/'),
 			dist: path.join(rootPath, themePath + '/dist/'), // from root folder path/to/theme
 			assets: path.join(rootPath, userConfig['assetsPath']), // from folder containing the package.json to the theme folder.
 			public: publicPath, // Used for webpack.output.publicpath - Had to be set this way to overcome middleware issues with dynamic path.
@@ -36,6 +36,18 @@ var config = merge(
 	},
 	userConfig,
 );
+
+if (userConfig['parentTheme']) {
+	config = merge(
+		{
+			path: {
+				parentTheme: path.join(rootPath, '../' + userConfig['parentTheme']),
+				parentThemeAssets: path.join(rootPath, '../' + userConfig['parentTheme'] + userConfig['assetsPath']),
+			},
+		},
+		config,
+	);
+}
 
 if (watchMode) {
 	config.entry.app.push('webpack-hot-middleware/client');

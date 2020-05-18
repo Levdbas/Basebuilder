@@ -103,10 +103,10 @@ const webpackConfig = {
 		alias: {
 			acfBlocks: path.resolve(__dirname, config.path.theme + '/partials/blocks'),
 			twigBlocks: path.resolve(__dirname, config.path.theme + '/resources/views/blocks'),
-			wpLemonMasterStyles: path.resolve(__dirname, config.path.masterThemeAssets + 'styles'),
-			wpLemonMasterScripts: path.resolve(__dirname, config.path.masterThemeAssets + 'scripts'),
-			wpLemonMasterFonts: path.resolve(__dirname, config.path.masterThemeAssets + 'fonts'),
-			wpLemonMasterImages: path.resolve(__dirname, config.path.masterThemeAssets + 'images'),
+			parentThemeStyles: path.resolve(__dirname, config.path.parentThemeAssets + 'styles'),
+			parentThemeScripts: path.resolve(__dirname, config.path.parentThemeAssets + 'scripts'),
+			parentThemeFonts: path.resolve(__dirname, config.path.parentThemeAssets + 'fonts'),
+			parentThemeImages: path.resolve(__dirname, config.path.parentThemeAssets + 'images'),
 		},
 	},
 	plugins: [
