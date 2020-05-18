@@ -30,8 +30,8 @@ const webpackConfig = {
 	devtool: CreateSourceMap ? 'source-map' : false,
 	watch: watchMode,
 	output: {
-		filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[hash].js',
-		chunkFilename: devMode ? 'scripts/[name].bundle.js' : 'scripts/[name].bundle.[hash].js',
+		filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[contenthash].js',
+		chunkFilename: devMode ? 'scripts/[name].bundle.js' : 'scripts/[name].bundle.[contenthash].js',
 		path: config.path.dist,
 		publicPath: config.path.public,
 		pathinfo: false,
@@ -94,7 +94,7 @@ const webpackConfig = {
 				loader: 'url-loader',
 				options: {
 					limit: 4096,
-					name: devMode ? '[path][name].[ext]' : '[path][name].[hash].[ext]',
+					name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash].[ext]',
 				},
 			},
 		],
@@ -136,7 +136,7 @@ const webpackConfig = {
 				{
 					context: config.path.assets + '/images',
 					from: '**/*',
-					to: devMode ? 'images/[path][name].[ext]' : 'images/[path][name].[hash].[ext]',
+					to: devMode ? 'images/[path][name].[ext]' : 'images/[path][name].[contenthash].[ext]',
 				},
 			],
 			{
@@ -161,7 +161,7 @@ const webpackConfig = {
 				paths: {},
 				entries: {},
 			},
-			map: file => {
+			map: (file) => {
 				if (!devMode) {
 					// Remove hash in manifest key
 					file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');
