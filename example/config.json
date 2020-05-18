@@ -3,9 +3,10 @@
         "app": ["./scripts/app.js", "./styles/app.scss"],
         "gutenberg": ["./scripts/gutenberg.js", "./styles/gutenberg.scss"]
     },
-    "sourceMaps": false,
-    "themePath": "web/app/themes/YOURTHEMENAME",
-    "rootToThemePath": "/app/themes/YOURTHEMENAME",
+    "sourceMaps": true,
+    "parentTheme": "parentThemName",
+    "themePath": "web/app/themes/themeName",
+    "rootToThemePath": "/app/themes/themeName",
     "assetsPath": "assets",
     "browserSyncURL": "example.local"
 }
