@@ -90,7 +90,7 @@ const webpackConfig = {
 			},
 			{
 				test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
-				include: config.path.assets,
+				include: [config.path.assets, config.path.parentThemeAssets],
 				loader: 'url-loader',
 				options: {
 					limit: 4096,
@@ -148,7 +148,7 @@ const webpackConfig = {
 				paths: {},
 				entries: {},
 			},
-			map: (file) => {
+			map: file => {
 				if (!devMode) {
 					// Remove hash in manifest key
 					file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');
