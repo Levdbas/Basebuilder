@@ -62,6 +62,40 @@ in the package.json.
 
 ## Changelog starting at 0.5
 
+### 0.8.4
+
+-   Add parent theme assets folder for url-loader
+-   Bump packages
+    -   fixes stylelint issue
+
+### 0.8.3
+
+-   Fix for copywebpack v2
+
+### 0.8.2
+
+-   Fix for copywebpack
+
+### 0.8.1
+
+-   Downgrade gifsicle package
+
+### 0.8.0
+
+-   Package bump
+-   remove stylelint prettier
+-   Move to contenthash instead of hash in webpack
+-   Remove unneeded resolves
+-   Add support for parent/child themes
+
+### 0.7.3
+
+-   Fix line style endings
+
+### 0.7.2
+
+-   revert increased max_old_space_size in node
+
 ### 0.7.1
 
 -   dependency bump
