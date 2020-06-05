@@ -4,7 +4,6 @@ const merge = require('webpack-merge');
 const chalk = require('chalk');
 const watchMode = global.watch || false;
 
-var userConfig = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
 var themePath = '/';
 
 /**
@@ -14,6 +13,8 @@ var themePath = '/';
 if (process.env.npm_package_config_userConfig) {
 	var userConfigPath = process.env.npm_package_config_userConfig;
 	userConfig = require(path.resolve(__dirname, rootPath) + userConfigPath);
+} else {
+	var userConfig = require(path.resolve(__dirname, rootPath) + '/assets/config.json');
 }
 
 /**
