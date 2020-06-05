@@ -90,7 +90,7 @@ const webpackConfig = {
 			},
 			{
 				test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
-				include: [config.path.assets, config.path.parentThemeAssets],
+				include: config.path.urlLoaderAssets,
 				loader: 'url-loader',
 				options: {
 					limit: 4096,

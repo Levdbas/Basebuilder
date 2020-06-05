@@ -31,6 +31,7 @@ var config = merge(
 			theme: path.join(rootPath, themePath), // from root folder path/to/theme
 			dist: path.join(rootPath, themePath + '/dist/'), // from root folder path/to/theme
 			assets: path.join(rootPath, userConfig['assetsPath']), // from folder containing the package.json to the theme folder.
+			urlLoaderAssets: [path.join(rootPath, userConfig['assetsPath'])],
 			public: publicPath, // Used for webpack.output.publicpath - Had to be set this way to overcome middleware issues with dynamic path.
 		},
 	},
@@ -47,6 +48,7 @@ if (userConfig['parentTheme']) {
 		},
 		config,
 	);
+	config.path.urlLoaderAssets.push(config.path.parentThemeAssets);
 }
 
 if (watchMode) {
