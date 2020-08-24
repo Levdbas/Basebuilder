@@ -1,6 +1,6 @@
 const path = require('path');
 const rootPath = process.cwd();
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const chalk = require('chalk');
 const watchMode = global.watch || false;
 
