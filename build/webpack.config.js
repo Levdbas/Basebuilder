@@ -75,8 +75,8 @@ const webpackConfig = {
 						loader: 'postcss-loader',
 						options: {
 							sourceMap: CreateSourceMap,
-							config: {
-								path: __dirname + '/postcss.config.js',
+							postcssOptions: {
+								config: path.resolve(__dirname, 'postcss.config.js'),
 							},
 						},
 					},
