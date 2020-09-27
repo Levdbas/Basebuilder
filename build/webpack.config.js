@@ -138,7 +138,7 @@ const webpackConfig = {
 			sass: {
 				path: 'resources/assets/styles/1_common',
 				files: ['_variables.scss'],
-				variables: ['colors', 'site-colors'],
+				variables: ['brand-colors'],
 			},
 		}),
 
