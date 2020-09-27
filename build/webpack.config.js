@@ -138,7 +138,7 @@ const webpackConfig = {
 			sass: {
 				path: 'resources/assets/styles/1_common',
 				files: ['_variables.scss'],
-				variables: ['colors'],
+				variables: ['colors', 'site-colors'],
 			},
 		}),
 
@@ -148,7 +148,7 @@ const webpackConfig = {
 				paths: {},
 				entries: {},
 			},
-			map: file => {
+			map: (file) => {
 				if (!devMode) {
 					// Remove hash in manifest key
 					file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');
