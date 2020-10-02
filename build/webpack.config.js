@@ -20,6 +20,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { merge } = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const PalettePlugin = require('palette-webpack-plugin');
+const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 const config = require('../config');
 const CreateSourceMap = devMode ? config.sourceMaps : false;
 
@@ -115,6 +116,9 @@ const webpackConfig = {
 			jQuery: 'jquery',
 			'window.jQuery': 'jquery',
 		}),
+		new DependencyExtractionWebpackPlugin({
+			outputFormat: 'json'
+		}),
 		new VueLoaderPlugin(),
 		new MiniCssExtractPlugin({
 			filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
@@ -148,7 +152,7 @@ const webpackConfig = {
 				paths: {},
 				entries: {},
 			},
-			map: (file) => {
+			map: file => {
 				if (!devMode) {
 					// Remove hash in manifest key
 					file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');

@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "0.9.3",
+    "version": "0.9.5",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
@@ -10,6 +10,7 @@
         "@babel/core": "^7.11",
         "@babel/preset-env": "^7.11",
         "@prettier/plugin-php": "^0.14",
+        "@wordpress/dependency-extraction-webpack-plugin": "^2.8.0",
         "babel-loader": "^8.1",
         "browser-sync": "^2.26.12",
         "browser-sync-webpack-plugin": "^2.2",
@@ -32,6 +33,7 @@
         "palette-webpack-plugin": "^1.0.2",
         "postcss-loader": "^4.0.2",
         "prettier": "^2.1",
+        "sass": "^1.26.11",
         "sass-loader": "^10.0",
         "style-loader": "^1.2",
         "stylelint": "^13.7",
@@ -46,7 +48,6 @@
         "webpack-format-messages": "^2.0.6",
         "webpack-hot-middleware": "^2.25.0",
         "webpack-manifest-plugin": "^2.2.0",
-        "webpack-merge": "^5.1.4",
-        "sass": "^1.26.11"
+        "webpack-merge": "^5.1.4"
     }
 }
