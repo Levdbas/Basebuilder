@@ -28,7 +28,7 @@ const webpackConfig = {
 	mode: env,
 	context: config.path.assets,
 	entry: config.entry,
-	devtool: CreateSourceMap ? 'source-map' : false,
+	devtool: CreateSourceMap ? 'inline-cheap-module-source-map' : false,
 	watch: watchMode,
 	output: {
 		filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[contenthash].js',
@@ -117,7 +117,7 @@ const webpackConfig = {
 			'window.jQuery': 'jquery',
 		}),
 		new DependencyExtractionWebpackPlugin({
-			outputFormat: 'json'
+			outputFormat: 'json',
 		}),
 		new VueLoaderPlugin(),
 		new MiniCssExtractPlugin({
@@ -152,7 +152,7 @@ const webpackConfig = {
 				paths: {},
 				entries: {},
 			},
-			map: file => {
+			map: (file) => {
 				if (!devMode) {
 					// Remove hash in manifest key
 					file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');
