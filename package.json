@@ -18,7 +18,6 @@
         "clean-webpack-plugin": "^3.0",
         "copy-webpack-plugin": "^6.2",
         "core-js": "^3.6.5",
-        "cross-env": "^7.0",
         "css-loader": "^4.3",
         "cssnano": "^4.1.10",
         "eslint": "^7.11",
