@@ -110,14 +110,19 @@ const webpackConfig = {
 			parentThemeImages: path.resolve(__dirname, config.path.parentThemeAssets + 'images'),
 		},
 	},
+	externals: {
+		$: 'jquery',
+		jQuery: 'jquery',
+		'window.jQuery': 'jquery',
+	},
 	plugins: [
+		new DependencyExtractionWebpackPlugin({
+			outputFormat: 'json',
+		}),
 		new webpack.ProvidePlugin({
 			$: 'jquery',
 			jQuery: 'jquery',
 			'window.jQuery': 'jquery',
-		}),
-		new DependencyExtractionWebpackPlugin({
-			outputFormat: 'json',
 		}),
 		new VueLoaderPlugin(),
 		new MiniCssExtractPlugin({
