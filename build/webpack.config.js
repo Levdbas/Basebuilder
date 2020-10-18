@@ -10,7 +10,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const imageminGifsicle = require('imagemin-gifsicle');
 const imageminJpegtran = require('imagemin-jpegtran');
 const imageminOptipng = require('imagemin-optipng');
@@ -209,11 +209,9 @@ if (watchMode) {
 if (!devMode) {
 	webpackConfig.plugins.push(
 		new CleanWebpackPlugin(),
-		new ImageminPlugin({
-			bail: false, // Ignore errors on corrupted images
-			cache: true,
-			name: '[path][name].[ext]',
-			imageminOptions: {
+		new ImageMinimizerPlugin({
+			filename: '[path][name].[ext]',
+			minimizerOptions: {
 				// Lossless optimization with custom option
 				// Feel free to experement with options for better result for you
 				plugins: [
