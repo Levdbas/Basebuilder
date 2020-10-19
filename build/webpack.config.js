@@ -210,7 +210,6 @@ if (!devMode) {
 	webpackConfig.plugins.push(
 		new CleanWebpackPlugin(),
 		new ImageMinimizerPlugin({
-			filename: '[path][name].[ext]',
 			minimizerOptions: {
 				// Lossless optimization with custom option
 				// Feel free to experement with options for better result for you
