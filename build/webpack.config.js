@@ -94,7 +94,7 @@ const webpackConfig = {
 				include: config.path.urlLoaderAssets,
 				loader: 'url-loader',
 				options: {
-					limit: 4096,
+					limit: 8192,
 					name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash].[ext]',
 				},
 			},
