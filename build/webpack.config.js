@@ -110,15 +110,8 @@ const webpackConfig = {
 			parentThemeImages: path.resolve(__dirname, config.path.parentThemeAssets + 'images'),
 		},
 	},
-	externals: {
-		$: 'jquery',
-		jQuery: 'jquery',
-		'window.jQuery': 'jquery',
-	},
+	externals: config.externals,
 	plugins: [
-		new DependencyExtractionWebpackPlugin({
-			outputFormat: 'json',
-		}),
 		new webpack.ProvidePlugin({
 			$: 'jquery',
 			jQuery: 'jquery',
@@ -232,4 +225,13 @@ if (!devMode) {
 		}),
 	);
 }
+if (!config.skipDependencyExtraction) {
+	webpackConfig.plugins.push(
+		new DependencyExtractionWebpackPlugin({
+			outputFormat: 'json',
+		}),
+	);
+}
+
+console.log(webpackConfig);
 module.exports = webpackConfig;

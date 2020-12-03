@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const watchMode = global.watch || false;
 
 var themePath = '/';
+var skipDependencyExtraction = false;
 var userConfigPath = '/assets/config.json';
 
 /**
@@ -36,6 +37,16 @@ if (userConfig['rootToThemePath']) {
 	process.exit(1);
 }
 
+var externals = {};
+
+/**
+ * If the /assets/config.json file has a skipDependencyExtraction option
+ * we overwrite the themePath var with this new path.
+ */
+if (!userConfig['skipDependencyExtraction']) {
+	externals = { $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery' };
+}
+
 /**
  * If the /assets/config.json file has a themePath option
  * we overwrite the themePath var with this new path.
@@ -53,6 +64,7 @@ var config = merge(
 			urlLoaderAssets: [path.join(rootPath, userConfig['assetsPath'])], // create path for the url-loader. When we have a parent/child theme going we'll add the parent theme assets later on.
 			public: publicPath, // Used for webpack.output.publicpath - Had to be set this way to overcome middleware issues with dynamic path.
 		},
+		externals: externals,
 	},
 	userConfig,
 );
@@ -68,6 +80,7 @@ if (userConfig['parentTheme']) {
 				parentTheme: path.join(rootPath, '../' + userConfig['parentTheme']),
 				parentThemeAssets: path.join(rootPath, '../' + userConfig['parentTheme'] + userConfig['assetsPath']),
 			},
+			skipDependencyExtraction: skipDependencyExtraction,
 		},
 		config,
 	);
