@@ -8,5 +8,6 @@
     "themePath": "web/app/themes/themeName",
     "rootToThemePath": "/app/themes/themeName",
     "assetsPath": "assets",
-    "browserSyncURL": "example.local"
+    "browserSyncURL": "example.local",
+    "skipDependencyExtraction": false
 }

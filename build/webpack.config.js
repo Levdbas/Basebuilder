@@ -233,5 +233,4 @@ if (!config.skipDependencyExtraction) {
 	);
 }
 
-console.log(webpackConfig);
 module.exports = webpackConfig;
