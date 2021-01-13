@@ -10,14 +10,9 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-const imageminGifsicle = require('imagemin-gifsicle');
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminOptipng = require('imagemin-optipng');
-const imageminSvgo = require('imagemin-svgo');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const ImageminPlugin = require('imagemin-webpack');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const { merge } = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const PalettePlugin = require('palette-webpack-plugin');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
@@ -42,7 +37,7 @@ const webpackConfig = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules[\/\\](?!(swiper|dom7)[\/\\])/,
+				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -62,20 +57,14 @@ const webpackConfig = {
 						loader: MiniCssExtractPlugin.loader,
 						options: {
 							publicPath: '../',
-							sourceMap: CreateSourceMap,
-							hmr: watchMode,
 						},
 					},
 					{
 						loader: 'css-loader',
-						options: {
-							sourceMap: CreateSourceMap,
-						},
 					},
 					{
 						loader: 'postcss-loader',
 						options: {
-							sourceMap: CreateSourceMap,
 							postcssOptions: {
 								config: path.resolve(__dirname, 'postcss.config.js'),
 							},
@@ -83,9 +72,6 @@ const webpackConfig = {
 					},
 					{
 						loader: 'sass-loader',
-						options: {
-							sourceMap: CreateSourceMap,
-						},
 					},
 				],
 			},
@@ -144,15 +130,15 @@ const webpackConfig = {
 			},
 		}),
 
-		new ManifestPlugin({
+		new WebpackManifestPlugin({
 			publicPath: '',
 			seed: {
 				paths: {},
 				entries: {},
 			},
 			map: (file) => {
-				if (!devMode) {
-					// Remove hash in manifest key
+				if (process.env.NODE_ENV === 'production') {
+					// Remove contenthash in manifest key
 					file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');
 				}
 				return file;
@@ -167,9 +153,7 @@ const webpackConfig = {
 		},
 		minimizer: [
 			new TerserPlugin({
-				cache: true,
 				parallel: true,
-				sourceMap: CreateSourceMap,
 				terserOptions: {
 					output: {
 						comments: false,
@@ -202,8 +186,11 @@ if (watchMode) {
 if (!devMode) {
 	webpackConfig.plugins.push(
 		new CleanWebpackPlugin(),
-		new ImageMinimizerPlugin({
-			minimizerOptions: {
+		new ImageminPlugin({
+			bail: false, // Ignore errors on corrupted images
+			cache: true,
+			name: '[path][name].[ext]',
+			imageminOptions: {
 				// Lossless optimization with custom option
 				// Feel free to experement with options for better result for you
 				plugins: [

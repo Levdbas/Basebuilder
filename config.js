@@ -94,7 +94,7 @@ if (userConfig['parentTheme']) {
  * Pushes hot middleware client to our entry when in watchmode.
  */
 if (watchMode) {
-	config.entry.app.push('webpack-hot-middleware/client');
+	config.entry.app.push('webpack-hot-middleware/client?reload=true&noInfo=true');
 }
 
 /**
