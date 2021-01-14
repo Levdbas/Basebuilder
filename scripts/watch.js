@@ -20,7 +20,6 @@ browserSync.init({
 		middleware: [
 			middleware(compiler, {
 				publicPath: webpackConfig.output.publicPath,
-				noInfo: true,
 			}),
 			webpackHotMiddleware(compiler, {
 				log: false,
