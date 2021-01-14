@@ -10,7 +10,7 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
@@ -186,17 +186,14 @@ if (watchMode) {
 if (!devMode) {
 	webpackConfig.plugins.push(
 		new CleanWebpackPlugin(),
-		new ImageminPlugin({
-			bail: false, // Ignore errors on corrupted images
-			cache: true,
-			name: '[path][name].[ext]',
-			imageminOptions: {
+		new ImageMinimizerPlugin({
+			minimizerOptions: {
 				// Lossless optimization with custom option
-				// Feel free to experement with options for better result for you
+				// Feel free to experiment with options for better result for you
 				plugins: [
 					['gifsicle', { interlaced: true }],
 					['jpegtran', { progressive: true }],
-					['optipng', { optimizationLevel: 1 }],
+					['optipng', { optimizationLevel: 5 }],
 					[
 						'svgo',
 						{
