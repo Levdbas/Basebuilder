@@ -209,6 +209,9 @@ if (!devMode) {
 		}),
 	);
 }
+/**
+ * TODO: DependencyExtractionWebpackPlugin komt niet in de manifest terecht. Waarom is dat?
+ */
 if (!config.skipDependencyExtraction) {
 	webpackConfig.plugins.push(
 		new DependencyExtractionWebpackPlugin({
