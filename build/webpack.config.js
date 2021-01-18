@@ -36,12 +36,13 @@ const webpackConfig = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.m?js$/,
 				exclude: /node_modules/,
 				use: {
 					loader: 'babel-loader',
 					options: {
 						cacheDirectory: true,
+						presets: [['@babel/preset-env', { targets: 'defaults' }]],
 					},
 				},
 			},
@@ -137,7 +138,7 @@ const webpackConfig = {
 				entries: {},
 			},
 			map: (file) => {
-				if (process.env.NODE_ENV === 'production') {
+				if (!devMode) {
 					// Remove contenthash in manifest key
 					file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');
 				}
