@@ -10,7 +10,7 @@ const formatMessages = require('webpack-format-messages');
 const chalk = require('chalk');
 
 const webpackConfig = require('../build/webpack.config');
-const fileSize = require('../fileSize');
+const fileSize = require('../helpers/fileSize');
 const compiler = webpack(webpackConfig);
 const config = require('../config');
 

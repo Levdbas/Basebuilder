@@ -23,7 +23,7 @@ notifier.notify({
 	message: 'Update available ' + chalk.dim(current) + chalk.reset(' → ') + chalk.green(latest) + ' \nRun ' + chalk.cyan('yarn add ') + packageName + ' to update',
 });
 
-const spawn = require('../crossSpawn');
+const spawn = require('./helpers/crossSpawn');
 const args = process.argv.slice(2);
 
 const scriptIndex = args.findIndex(
@@ -37,7 +37,7 @@ switch (script) {
 	case 'production':
 	case 'development':
 	case 'watch': {
-		const result = spawn.sync('node', nodeArgs.concat(require.resolve('../scripts/' + script)).concat(args.slice(scriptIndex + 1)), { stdio: 'inherit' });
+		const result = spawn.sync('node', nodeArgs.concat(require.resolve('./tasks/' + script)).concat(args.slice(scriptIndex + 1)), { stdio: 'inherit' });
 		if (result.signal) {
 			if (result.signal === 'SIGKILL') {
 				console.log('The build failed because the process exited too early. ' + 'This probably means the system ran out of memory or someone called ' + '`kill -9` on the process.');
