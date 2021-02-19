@@ -13,7 +13,9 @@
         "userConfig": "/tests/assets/config.json"
     },
     "scripts": {
-        "test": "src/index.js development"
+        "test-dev": "src/index.js development",
+        "test-production": "src/index.js production",
+        "test-watch": "src/index.js watch"
     },
     "dependencies": {
         "@babel/core": "^7.12",
@@ -24,6 +26,7 @@
         "browser-sync": "^2.26",
         "chalk": "^4.1.0",
         "clean-webpack-plugin": "^3.0",
+        "commander": "^7.1.0",
         "copy-webpack-plugin": "^6.4",
         "core-js": "^3.9.0",
         "cross-spawn": "^7.0.3",

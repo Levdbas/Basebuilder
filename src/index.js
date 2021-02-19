@@ -4,54 +4,47 @@
 // Update notifier.
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
+const { version } = require('../package.json');
 const pkg = require('../package.json');
-var current = '';
-var latest = '';
-var packageName = '';
+const { program } = require('commander');
+
 const notifier = updateNotifier({
 	pkg,
 	shouldNotifyInNpmScript: true,
 });
 
 if (notifier.update !== undefined) {
-	current = notifier.update.current;
-	latest = notifier.update.latest;
-	packageName = notifier.packageName;
+
+	notifier.notify({
+		message: 'Update available ' + chalk.dim(notifier.update.current) + chalk.reset(' → ') + chalk.green(notifier.update.latest) + ' \nRun ' + chalk.cyan('yarn add ') + notifier.packageName + ' to update',
+	});
 }
 
-notifier.notify({
-	message: 'Update available ' + chalk.dim(current) + chalk.reset(' → ') + chalk.green(latest) + ' \nRun ' + chalk.cyan('yarn add ') + packageName + ' to update',
-});
+program
+	.name('basebuilder-config').description(
+		'Webpack config for WordPress projects.\n\n'
+	)
+	.version(version)
 
-const spawn = require('./helpers/crossSpawn');
-const args = process.argv.slice(2);
+program
+	.command('development')
+	.description('Build assets once for development.')
+	.action(() => {
+		require('./tasks/development');
+	});
 
-const scriptIndex = args.findIndex(
-	// x => x === 'build' || x === 'eject' || x === 'start' || x === 'test'
-	x => x === 'start' || x === 'build' || x === 'eject' || x === 'test',
-);
-const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
-const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : [];
+program
+	.command('watch')
+	.description('Serve assets and proxy website with browsersync.')
+	.action(() => {
+		require('./tasks/watch');
+	});
 
-switch (script) {
-	case 'production':
-	case 'development':
-	case 'watch': {
-		const result = spawn.sync('node', nodeArgs.concat(require.resolve('./tasks/' + script)).concat(args.slice(scriptIndex + 1)), { stdio: 'inherit' });
-		if (result.signal) {
-			if (result.signal === 'SIGKILL') {
-				console.log('The build failed because the process exited too early. ' + 'This probably means the system ran out of memory or someone called ' + '`kill -9` on the process.');
-			} else if (result.signal === 'SIGTERM') {
-				console.log('The build failed because the process exited too early. ' + 'Someone might have called `kill` or `killall`, or the system could ' + 'be shutting down.');
-			}
-			process.exit(1);
-		}
-		process.exit(result.status);
-		break;
-	}
-	default:
-		console.log('Unknown script "' + script + '".');
-		console.log('Perhaps you need to update basebuilder-config?');
-		console.log('Update via: yarn add basebuilder-config?');
-		break;
-}
+program
+	.command('production', { isDefault: true })
+	.description('Build assets optimized for production.')
+	.action((options) => {
+		require('./tasks/production');
+	});
+
+program.parse(process.argv);
