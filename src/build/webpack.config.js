@@ -15,7 +15,7 @@ const imageminGifsicle = require('imagemin-gifsicle');
 const imageminJpegtran = require('imagemin-jpegtran');
 const imageminOptipng = require('imagemin-optipng');
 const imageminSvgo = require('imagemin-svgo');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { merge } = require('webpack-merge');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
@@ -62,8 +62,6 @@ const webpackConfig = {
 						loader: MiniCssExtractPlugin.loader,
 						options: {
 							publicPath: '../',
-							sourceMap: CreateSourceMap,
-							hmr: watchMode,
 						},
 					},
 					{
@@ -144,7 +142,7 @@ const webpackConfig = {
 			},
 		}),
 
-		new ManifestPlugin({
+		new WebpackManifestPlugin({
 			publicPath: '',
 			seed: {
 				paths: {},
