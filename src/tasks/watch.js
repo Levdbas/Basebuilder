@@ -20,6 +20,7 @@ browserSync.init({
 		middleware: [
 			middleware(compiler, {
 				publicPath: webpackConfig.output.publicPath,
+				stats: false,
 				writeToDisk: (filePath) => {
 					return /^(?!.*(hot-update)).*/.test(filePath);
 				},
