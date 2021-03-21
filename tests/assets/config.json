@@ -1,0 +1,10 @@
+{
+    "entry": {
+        "app": ["./scripts/app.js", "./styles/app.scss"]
+    },
+    "sourceMaps": true,
+    "assetsPath": "/tests/assets/",
+    "rootToThemePath": "/tests/",
+    "themePath": "/tests/",
+    "browserSyncURL": "http://wplemon2.local"
+}

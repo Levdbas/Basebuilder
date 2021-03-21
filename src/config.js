@@ -100,5 +100,6 @@ if (watchMode) {
 /**
  * Pushes our entry file to the start of the entry array.
  */
-config.entry.app.unshift('basebuilder-config/publicpath_entry.js');
+//config.entry.app.unshift('../../src/helpers/publicpath-entry.js');
+config.entry.app.unshift('basebuilder-config/src/helpers/publicpath-entry.js');
 module.exports = config;

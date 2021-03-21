@@ -30,7 +30,6 @@ browserSync.init({
 		],
 	},
 });
-
 compiler.hooks.done.tap('test', (stats) => {
 	const messages = formatMessages(stats);
 
