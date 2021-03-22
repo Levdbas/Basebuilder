@@ -1,6 +1,6 @@
 {
     "entry": {
-        "app": ["./scripts/app.js", "./styles/app.scss"]
+        "app": ["./scripts/app.js"]
     },
     "sourceMaps": true,
     "assetsPath": "/tests/assets/",

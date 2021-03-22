@@ -66,5 +66,9 @@
     },
     "peerDependencies": {
         "postcss": "7.x"
+    },
+    "devDependencies": {
+        "bootstrap": "^4.6.0",
+        "popper.js": "^1.16.1"
     }
 }

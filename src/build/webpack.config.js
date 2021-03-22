@@ -144,17 +144,6 @@ const webpackConfig = {
 
 		new WebpackManifestPlugin({
 			publicPath: '',
-			seed: {
-				paths: {},
-				entries: {},
-			},
-			map: (file) => {
-				if (!devMode) {
-					// Remove hash in manifest key
-					file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');
-				}
-				return file;
-			},
 		}),
 	],
 	optimization: {
@@ -162,6 +151,15 @@ const webpackConfig = {
 			chunks: 'all',
 			automaticNameDelimiter: '-',
 			name: 'vendor',
+			cacheGroups: {
+				vendorBase: {
+					test: /_ie-legacy.scss/,
+					name: "ie-legacy",
+					chunks: 'all',
+					enforce: true,
+					reuseExistingChunk: false,
+				},
+			},
 		},
 		minimizer: [
 			new TerserPlugin({
