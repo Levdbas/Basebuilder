@@ -111,12 +111,13 @@ const webpackConfig = {
 		new VueLoaderPlugin(),
 		new MiniCssExtractPlugin({
 			filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
+			chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
 		}),
 		new CopyWebpackPlugin({
 			patterns: [
 				{
 					from: config.path.assets + '/images',
-					to: devMode ? 'images/[path][name].[ext]' : 'images/[path][name].[contenthash].[ext]',
+					to: devMode ? 'images/[path][name][ext]' : 'images/[path][name].[contenthash][ext]',
 					globOptions: {
 						ignore: ['.gitkeep'],
 					},
@@ -137,24 +138,20 @@ const webpackConfig = {
 
 		new WebpackManifestPlugin({
 			publicPath: '',
-			seed: {
-				paths: {},
-				entries: {},
-			},
-			map: (file) => {
-				if (!devMode) {
-					// Remove contenthash in manifest key
-					file.name = file.name.replace(/(\.[a-f0-9]{32})(\..*)$/, '$2');
-				}
-				return file;
-			},
 		}),
 	],
 	optimization: {
+		runtimeChunk: 'single',
 		splitChunks: {
-			chunks: 'all',
-			automaticNameDelimiter: '-',
-			name: 'vendor',
+			cacheGroups: {
+				vendorBase: {
+					test: /_vendor.scss/,
+					name: "vendor-frontend",
+					chunks: 'all',
+					enforce: true,
+					reuseExistingChunk: false,
+				},
+			},
 		},
 		minimizer: [
 			new TerserPlugin({
@@ -214,9 +211,7 @@ if (!devMode) {
 		}),
 	);
 }
-/**
- * TODO: DependencyExtractionWebpackPlugin komt niet in de manifest terecht. Waarom is dat?
- */
+
 if (!config.skipDependencyExtraction) {
 	webpackConfig.plugins.push(
 		new DependencyExtractionWebpackPlugin({

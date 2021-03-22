@@ -3,3 +3,19 @@ $red: red;
 .test{
    color:$red;
 }
+
+
+$nav-text: (
+	"font-weight": 400,
+	"font-size": 1rem,
+	"transform": none,
+	"color": $red,
+	"hover": $red,
+	"active": true
+) !default;
+
+
+
+.test{
+   content: quote(inspect($nav-text));
+}
