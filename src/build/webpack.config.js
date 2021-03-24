@@ -42,7 +42,7 @@ const webpackConfig = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules[\/\\](?!(swiper|dom7)[\/\\])/,
+				exclude: /node_modules[\/\\](?!(swiper|dom7|sal.js)[\/\\])/,
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -92,7 +92,7 @@ const webpackConfig = {
 				include: config.path.urlLoaderAssets,
 				loader: 'url-loader',
 				options: {
-					limit: 8192,
+					limit: 4096,
 					name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash].[ext]',
 				},
 			},
