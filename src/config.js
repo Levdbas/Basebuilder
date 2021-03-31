@@ -4,6 +4,10 @@ const { merge } = require('webpack-merge');
 const chalk = require('chalk');
 const watchMode = global.watch || false;
 
+const { program } = require('commander');
+program.parse(process.argv);
+const options = program.opts();
+
 var themePath = '/';
 var skipDependencyExtraction = false;
 var userConfigPath = '/assets/config.json';
@@ -100,6 +104,10 @@ if (watchMode) {
 /**
  * Pushes our entry file to the start of the entry array.
  */
-config.entry.app.unshift('../../src/helpers/publicpath-entry.js');
-//config.entry.app.unshift('basebuilder-config/src/helpers/publicpath-entry.js');
+if (options.isTestRun) {
+	config.entry.app.unshift('../../src/helpers/publicpath-entry.js');
+} else {
+	config.entry.app.unshift('basebuilder-config/src/helpers/publicpath-entry.js');
+}
+
 module.exports = config;

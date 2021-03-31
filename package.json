@@ -18,9 +18,9 @@
         "userConfig": "/tests/assets/config.json"
     },
     "scripts": {
-        "test-dev": "src/index.js development",
-        "test-production": "src/index.js production",
-        "test-watch": "src/index.js watch"
+        "test-dev": "src/index.js development --isTestRun",
+        "test-production": "node src/index.js production --isTestRun",
+        "test-watch": "node src/index.js watch --isTestRun"
     },
     "dependencies": {
         "@babel/core": "^7.13",
@@ -68,6 +68,7 @@
         "postcss": "^8.2.8"
     },
     "devDependencies": {
-        "bootstrap": "^4.6.0"
+        "bootstrap": "^4.6.0",
+        "popper.js": "^1.16.1"
     }
 }
