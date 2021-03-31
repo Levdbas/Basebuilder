@@ -164,7 +164,6 @@ const webpackConfig = {
 				},
 			}),
 		],
-
 	},
 };
 
