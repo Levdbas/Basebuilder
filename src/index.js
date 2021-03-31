@@ -24,19 +24,22 @@ program
 	.name('basebuilder-config').description(
 		'Webpack config for WordPress projects.\n\n'
 	)
+	.option('-t, --isTestRun', 'Run in test mode')
 	.version(version)
+
+
 
 program
 	.command('development')
 	.description('Build assets once for development.')
-	.action(() => {
+	.action((options) => {
 		require('./tasks/development');
 	});
 
 program
 	.command('watch')
 	.description('Serve assets and proxy website with browsersync.')
-	.action(() => {
+	.action((options) => {
 		require('./tasks/watch');
 	});
 
@@ -47,4 +50,6 @@ program
 		require('./tasks/production');
 	});
 
+
 program.parse(process.argv);
+const options = program.opts();
