@@ -7,14 +7,7 @@ const watchMode = global.watch || false;
 const { program } = require('commander');
 program.parse(process.argv);
 const options = program.opts();
-
-var themePath = '/';
-var assetsPath = userConfig['assetsPath'];
-var skipDependencyExtraction = false;
 var userConfigPath = '/assets/config.json';
-var scssSettingsFolder = '';
-var publicPath = '';
-var externals = {};
 
 /**
  * Checks if the config.json path is available inside the package.json config.
@@ -35,6 +28,13 @@ try {
     process.exit();
 }
 userConfig = require(path.resolve(__dirname, rootPath) + userConfigPath);
+
+var themePath = '/';
+var assetsPath = userConfig['assetsPath'];
+var skipDependencyExtraction = false;
+var scssSettingsFolder = '';
+var publicPath = '';
+var externals = {};
 
 /**
  * If the /assets/config.json file has a themePath option
