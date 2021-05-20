@@ -9,8 +9,12 @@ program.parse(process.argv);
 const options = program.opts();
 
 var themePath = '/';
+var assetsPath = userConfig['assetsPath'];
 var skipDependencyExtraction = false;
 var userConfigPath = '/assets/config.json';
+var scssSettingsFolder = '';
+var publicPath = '';
+var externals = {};
 
 /**
  * Checks if the config.json path is available inside the package.json config.
@@ -20,6 +24,9 @@ if (process.env.npm_package_config_userConfig) {
     userConfigPath = process.env.npm_package_config_userConfig;
 }
 
+/**
+ * Checks if userConfigPath file exists.
+ */
 try {
     require.resolve((__dirname, rootPath) + userConfigPath);
 } catch (e) {
@@ -29,26 +36,36 @@ try {
 }
 userConfig = require(path.resolve(__dirname, rootPath) + userConfigPath);
 
+/**
+ * If the /assets/config.json file has a themePath option
+ * we overwrite the themePath var with this new path.
+ */
+if (userConfig['themePath']) {
+    themePath = userConfig['themePath'];
+}
+
+/***
+ * Set the path to the scss folder containing the _variables.scss file
+ */
 if (!userConfig['scssSettingsFolder']) {
     console.log('\n❌ ', chalk.black.bgRed('Variable scssSettingsFolder not set in config.json'));
     console.log('This is probably 01-settings/ or 1_common/ \n');
     process.exit(1);
 }
+scssSettingsFolder = path.join(assetsPath, 'styles', userConfig['scssSettingsFolder']);
+scssSettingsFolder = scssSettingsFolder.replace(/^\/+/, '');
 
 /**
  * Check if root to theme path is set.
  * Sets up proper publicPath and removes extra slashes from the url.
  */
-if (userConfig['rootToThemePath']) {
-    var publicPath = 'http://localhost:3000/' + userConfig['rootToThemePath'] + '/dist/';
-    publicPath = publicPath.replace(/([^:])(\/\/+)/g, '$1/');
-} else {
+if (!userConfig['rootToThemePath']) {
     console.log('\n❌ ', chalk.black.bgRed('Variable rootToThemePath not set in config.json'));
     console.log('This is probably /app/themes/YOURTHEMENAME/ or /wp-content/themes/YOURTHEMENAME/ \n');
     process.exit(1);
 }
-
-var externals = {};
+publicPath = 'http://localhost:3000/' + userConfig['rootToThemePath'] + '/dist/';
+publicPath = publicPath.replace(/([^:])(\/\/+)/g, '$1/');
 
 /**
  * If the /assets/config.json file has a skipDependencyExtraction option
@@ -58,27 +75,18 @@ if (!userConfig['skipDependencyExtraction']) {
     externals = { $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery' };
 }
 
-var assetsPath = userConfig['assetsPath'];
-
-/**
- * If the /assets/config.json file has a themePath option
- * we overwrite the themePath var with this new path.
- */
-if (userConfig['themePath']) {
-    themePath = userConfig['themePath'];
-}
-
 var config = merge(
     {
         path: {
             theme: path.join(rootPath, themePath), // from root folder path/to/theme
-            scssSettingsFolder: [path.join(assetsPath, 'styles', userConfig['scssSettingsFolder'])],
             dist: path.join(rootPath, themePath, 'dist'), // from root folder path/to/theme
             assets: path.join(rootPath, assetsPath), // from folder containing the package.json to the theme folder.
+            scssSettingsFolder: scssSettingsFolder,
             urlLoaderAssets: [path.join(rootPath, assetsPath)], // create path for the url-loader. When we have a parent/child theme going we'll add the parent theme assets later on.
             public: publicPath, // Used for webpack.output.publicpath - Had to be set this way to overcome middleware issues with dynamic path.
         },
         externals: externals,
+        skipDependencyExtraction: skipDependencyExtraction,
     },
     userConfig,
 );
@@ -94,7 +102,6 @@ if (userConfig['parentTheme']) {
                 parentTheme: path.join(rootPath, '../' + userConfig['parentTheme']),
                 parentThemeAssets: path.join(rootPath, '../' + userConfig['parentTheme'] + userConfig['assetsPath']),
             },
-            skipDependencyExtraction: skipDependencyExtraction,
         },
         config,
     );
