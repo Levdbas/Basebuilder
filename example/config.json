@@ -8,6 +8,7 @@
     "themePath": "web/app/themes/themeName",
     "rootToThemePath": "/app/themes/themeName",
     "assetsPath": "assets",
+    "scssSettingsFolder": "01-settings/",
     "browserSyncURL": "example.local",
     "skipDependencyExtraction": false
 }
