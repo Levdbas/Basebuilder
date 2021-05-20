@@ -25,155 +25,155 @@ const config = require('../config');
 const CreateSourceMap = devMode ? config.sourceMaps : false;
 
 const webpackConfig = {
-	mode: env,
-	context: config.path.assets,
-	entry: config.entry,
-	devtool: CreateSourceMap ? 'inline-cheap-module-source-map' : false,
-	watch: watchMode,
-	output: {
-		filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[contenthash].js',
-		chunkFilename: devMode ? 'scripts/[name].bundle.js' : 'scripts/[name].bundle.[contenthash].js',
-		path: config.path.dist,
-		publicPath: config.path.public,
-		pathinfo: false,
-	},
-	performance: { hints: false },
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules[\/\\](?!(swiper|dom7|sal.js)[\/\\])/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						cacheDirectory: true,
-					},
-				},
-			},
-			{
-				test: /\.vue$/,
-				loader: 'vue-loader',
-			},
-			{
-				test: /\.scss$/,
-				exclude: /node_modules/,
-				use: [
-					{
-						loader: MiniCssExtractPlugin.loader,
-						options: {
-							publicPath: '../',
-						},
-					},
-					{
-						loader: 'css-loader',
-						options: {
-							sourceMap: CreateSourceMap,
-						},
-					},
-					{
-						loader: 'postcss-loader',
-						options: {
-							sourceMap: CreateSourceMap,
-							postcssOptions: {
-								config: path.resolve(__dirname, 'postcss.config.js'),
-							},
-						},
-					},
-					{
-						loader: 'sass-loader',
-						options: {
-							sourceMap: CreateSourceMap,
-						},
-					},
-				],
-			},
-			{
-				test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
-				include: config.path.urlLoaderAssets,
-				loader: 'url-loader',
-				options: {
-					limit: 4096,
-					name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash].[ext]',
-				},
-			},
-		],
-	},
-	resolve: {
-		alias: {
-			acfBlocks: path.resolve(__dirname, config.path.theme + '/partials/blocks'),
-			twigBlocks: path.resolve(__dirname, config.path.theme + '/resources/views/blocks'),
-			parentThemeStyles: path.resolve(__dirname, config.path.parentThemeAssets + 'styles'),
-			parentThemeScripts: path.resolve(__dirname, config.path.parentThemeAssets + 'scripts'),
-			parentThemeFonts: path.resolve(__dirname, config.path.parentThemeAssets + 'fonts'),
-			parentThemeImages: path.resolve(__dirname, config.path.parentThemeAssets + 'images'),
-		},
-	},
-	externals: config.externals,
-	plugins: [
-		new webpack.ProvidePlugin({
-			$: 'jquery',
-			jQuery: 'jquery',
-			'window.jQuery': 'jquery',
-		}),
-		new VueLoaderPlugin(),
-		new MiniCssExtractPlugin({
-			filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
-		}),
-		new CopyWebpackPlugin({
-			patterns: [
-				{
-					from: config.path.assets + '/images',
-					to: devMode ? 'images/[path][name].[ext]' : 'images/[path][name].[contenthash].[ext]',
-					globOptions: {
-						ignore: ['.gitkeep'],
-					},
-				},
-			],
-		}),
+    mode: env,
+    context: config.path.assets,
+    entry: config.entry,
+    devtool: CreateSourceMap ? 'inline-cheap-module-source-map' : false,
+    watch: watchMode,
+    output: {
+        filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[contenthash].js',
+        chunkFilename: devMode ? 'scripts/[name].bundle.js' : 'scripts/[name].bundle.[contenthash].js',
+        path: config.path.dist,
+        publicPath: config.path.public,
+        pathinfo: false,
+    },
+    performance: { hints: false },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules[\/\\](?!(swiper|dom7|sal.js)[\/\\])/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        cacheDirectory: true,
+                    },
+                },
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+            },
+            {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: '../',
+                        },
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: CreateSourceMap,
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            sourceMap: CreateSourceMap,
+                            postcssOptions: {
+                                config: path.resolve(__dirname, 'postcss.config.js'),
+                            },
+                        },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: CreateSourceMap,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
+                include: config.path.urlLoaderAssets,
+                loader: 'url-loader',
+                options: {
+                    limit: 4096,
+                    name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash].[ext]',
+                },
+            },
+        ],
+    },
+    resolve: {
+        alias: {
+            acfBlocks: path.resolve(__dirname, config.path.theme + '/partials/blocks'),
+            twigBlocks: path.resolve(__dirname, config.path.theme + '/resources/views/blocks'),
+            parentThemeStyles: path.resolve(__dirname, config.path.parentThemeAssets + 'styles'),
+            parentThemeScripts: path.resolve(__dirname, config.path.parentThemeAssets + 'scripts'),
+            parentThemeFonts: path.resolve(__dirname, config.path.parentThemeAssets + 'fonts'),
+            parentThemeImages: path.resolve(__dirname, config.path.parentThemeAssets + 'images'),
+        },
+    },
+    externals: config.externals,
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+        }),
+        new VueLoaderPlugin(),
+        new MiniCssExtractPlugin({
+            filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: config.path.assets + '/images',
+                    to: devMode ? 'images/[path][name].[ext]' : 'images/[path][name].[contenthash].[ext]',
+                    globOptions: {
+                        ignore: ['.gitkeep'],
+                    },
+                },
+            ],
+        }),
 
-		new PalettePlugin({
-			output: 'palette.json',
-			blacklist: ['transparent', 'inherit'],
-			pretty: false,
-			sass: {
-				path: 'resources/assets/styles/1_common',
-				files: ['_variables.scss'],
-				variables: ['brand-colors'],
-			},
-		}),
+        new PalettePlugin({
+            output: 'palette.json',
+            blacklist: ['transparent', 'inherit'],
+            pretty: false,
+            sass: {
+                path: config.path.scssSettingsFolder,
+                files: ['_variables.scss'],
+                variables: ['brand-colors'],
+            },
+        }),
 
-		new WebpackManifestPlugin({
-			publicPath: '',
-		}),
-	],
-	optimization: {
-		splitChunks: {
-			chunks: 'all',
-			automaticNameDelimiter: '-',
-			name: 'vendor',
-			cacheGroups: {
-				vendorBase: {
-					test: /_ie-legacy.scss/,
-					name: "ie-legacy",
-					chunks: 'all',
-					enforce: true,
-					reuseExistingChunk: false,
-				},
-			},
-		},
-		minimizer: [
-			new TerserPlugin({
-				cache: true,
-				parallel: true,
-				sourceMap: CreateSourceMap,
-				terserOptions: {
-					output: {
-						comments: false,
-					},
-				},
-			}),
-		],
-	},
+        new WebpackManifestPlugin({
+            publicPath: '',
+        }),
+    ],
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            automaticNameDelimiter: '-',
+            name: 'vendor',
+            cacheGroups: {
+                vendorBase: {
+                    test: /_ie-legacy.scss/,
+                    name: 'ie-legacy',
+                    chunks: 'all',
+                    enforce: true,
+                    reuseExistingChunk: false,
+                },
+            },
+        },
+        minimizer: [
+            new TerserPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: CreateSourceMap,
+                terserOptions: {
+                    output: {
+                        comments: false,
+                    },
+                },
+            }),
+        ],
+    },
 };
 
 /**
@@ -186,7 +186,7 @@ const webpackConfig = {
  * @return {object}           updated webpackConfig configuration object.
  */
 if (watchMode) {
-	webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+    webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 
 /**
@@ -196,37 +196,37 @@ if (watchMode) {
  * @return {object}           updated webpackConfig configuration object.
  */
 if (!devMode) {
-	webpackConfig.plugins.push(
-		new CleanWebpackPlugin(),
-		new ImageMinimizerPlugin({
-			minimizerOptions: {
-				// Lossless optimization with custom option
-				// Feel free to experement with options for better result for you
-				plugins: [
-					['gifsicle', { interlaced: true }],
-					['jpegtran', { progressive: true }],
-					['optipng', { optimizationLevel: 1 }],
-					[
-						'svgo',
-						{
-							plugins: [
-								{
-									removeViewBox: false,
-								},
-							],
-						},
-					],
-				],
-			},
-		}),
-	);
+    webpackConfig.plugins.push(
+        new CleanWebpackPlugin(),
+        new ImageMinimizerPlugin({
+            minimizerOptions: {
+                // Lossless optimization with custom option
+                // Feel free to experement with options for better result for you
+                plugins: [
+                    ['gifsicle', { interlaced: true }],
+                    ['jpegtran', { progressive: true }],
+                    ['optipng', { optimizationLevel: 1 }],
+                    [
+                        'svgo',
+                        {
+                            plugins: [
+                                {
+                                    removeViewBox: false,
+                                },
+                            ],
+                        },
+                    ],
+                ],
+            },
+        }),
+    );
 }
 if (!config.skipDependencyExtraction) {
-	webpackConfig.plugins.push(
-		new DependencyExtractionWebpackPlugin({
-			outputFormat: 'json',
-		}),
-	);
+    webpackConfig.plugins.push(
+        new DependencyExtractionWebpackPlugin({
+            outputFormat: 'json',
+        }),
+    );
 }
 
 module.exports = webpackConfig;

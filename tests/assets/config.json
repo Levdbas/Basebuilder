@@ -6,5 +6,6 @@
     "assetsPath": "/tests/assets/",
     "rootToThemePath": "/tests/",
     "themePath": "/tests/",
+    "scssSettingsFolder": "01-settings/",
     "browserSyncURL": "http://wplemon2.local"
 }
