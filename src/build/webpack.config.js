@@ -15,7 +15,7 @@ const imageminGifsicle = require('imagemin-gifsicle');
 const imageminJpegtran = require('imagemin-jpegtran');
 const imageminOptipng = require('imagemin-optipng');
 const imageminSvgo = require('imagemin-svgo');
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 const TerserPlugin = require('terser-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const PalettePlugin = require('palette-webpack-plugin');
@@ -103,6 +103,14 @@ const webpackConfig = {
     },
     externals: config.externals,
     plugins: [
+        new WebpackAssetsManifest({
+            entrypointsUseAssets: true,
+            done(manifest, stats) {
+                console.log(stats.assetsInfo);
+                new WebpackAssetsManifest();
+                manifest.writeTo('test-manifest.json');
+            },
+        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -130,40 +138,29 @@ const webpackConfig = {
             blacklist: ['transparent', 'inherit'],
             pretty: false,
             sass: {
-                path: 'resources/assets/styles/1_common',
+                path: config.path.scssSettingsFolder,
                 files: ['_variables.scss'],
                 variables: ['brand-colors'],
             },
         }),
-
-        new WebpackManifestPlugin({
-            publicPath: '',
-        }),
     ],
     optimization: {
-        runtimeChunk: 'single',
         splitChunks: {
+            chunks: 'all',
+            automaticNameDelimiter: '-',
+            name: 'vendor',
             cacheGroups: {
                 vendorBase: {
-                    test: /_vendor.scss/,
-                    name: 'vendor-frontend',
+                    test: /_ie-legacy.scss/,
+                    name: 'ie-legacy',
                     chunks: 'all',
                     enforce: true,
-                    automaticNameDelimiter: '-',
-                    name: 'vendor',
+                    reuseExistingChunk: false,
                 },
             },
         },
-        minimizer: [
-            new TerserPlugin({
-                parallel: true,
-                terserOptions: {
-                    output: {
-                        comments: false,
-                    },
-                },
-            }),
-        ],
+        minimize: true,
+        minimizer: [new TerserPlugin({})],
     },
 };
 
@@ -192,11 +189,11 @@ if (!devMode) {
         new ImageMinimizerPlugin({
             minimizerOptions: {
                 // Lossless optimization with custom option
-                // Feel free to experiment with options for better result for you
+                // Feel free to experement with options for better result for you
                 plugins: [
                     ['gifsicle', { interlaced: true }],
                     ['jpegtran', { progressive: true }],
-                    ['optipng', { optimizationLevel: 5 }],
+                    ['optipng', { optimizationLevel: 1 }],
                     [
                         'svgo',
                         {

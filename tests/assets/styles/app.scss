@@ -4,20 +4,6 @@ $red: red;
    color:$red;
 }
 
-$white: #ffffff !default;
-$black: #000000 !default;
-$yellow: #f7d600 !default;
-
-$base-color: $black !default;
-$highlight1: $yellow !default;
-$highlight2: $black !default;
-$background-color: #f9f9f9 !default;
-
-$brand-colors: (
-	"white": $white,
-	"black": $black,
-	"gray": #f3f3f3,
-	"yellow": $highlight1
-) !default;
 
 @import "ie-legacy";
+@import "01-settings/variables";
