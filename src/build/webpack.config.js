@@ -11,6 +11,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const { extendDefaultPlugins } = require('svgo');
 const imageminGifsicle = require('imagemin-gifsicle');
 const imageminJpegtran = require('imagemin-jpegtran');
 const imageminOptipng = require('imagemin-optipng');
@@ -209,11 +210,12 @@ if (!devMode) {
                     [
                         'svgo',
                         {
-                            plugins: [
+                            plugins: extendDefaultPlugins([
                                 {
-                                    removeViewBox: false,
+                                    name: 'removeViewBox',
+                                    active: false,
                                 },
-                            ],
+                            ]),
                         },
                     ],
                 ],
