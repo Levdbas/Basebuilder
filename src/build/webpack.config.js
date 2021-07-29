@@ -15,7 +15,7 @@ const imageminGifsicle = require('imagemin-gifsicle');
 const imageminJpegtran = require('imagemin-jpegtran');
 const imageminOptipng = require('imagemin-optipng');
 const imageminSvgo = require('imagemin-svgo');
-const WebpackAssetsManifest = require('webpack-assets-manifest');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const PalettePlugin = require('palette-webpack-plugin');
@@ -103,13 +103,9 @@ const webpackConfig = {
     },
     externals: config.externals,
     plugins: [
-        new WebpackAssetsManifest({
-            entrypointsUseAssets: true,
-            done(manifest, stats) {
-                console.log(stats.assetsInfo);
-                new WebpackAssetsManifest();
-                manifest.writeTo('test-manifest.json');
-            },
+        new WebpackManifestPlugin({
+            publicPath: '',
+            useLegacyEmit: true,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
