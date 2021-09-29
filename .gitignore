@@ -1,6 +1,7 @@
 # NPM #
 ##########
 node_modules
+**/vendor/**
 **/node_modules/**
 **/.yarn/**
 # BaseBuilder-config #
