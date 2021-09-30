@@ -81,12 +81,17 @@ const webpackConfig = {
                 ],
             },
             {
-                test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
-                include: config.path.urlLoaderAssets,
-                loader: 'url-loader',
-                options: {
-                    limit: 4096,
-                    name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash].[ext]',
+                test: /\.(png|jpg|gif|svg)$/i,
+                type: 'asset',
+                generator: {
+                    filename: devMode ? '[path][name].[ext]' : '[path][name].[contenthash][ext]',
+                },
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf)$/,
+                type: 'asset',
+                generator: {
+                    filename: devMode ? '[path][name].[ext]' : '[path][name].[contenthash][ext]',
                 },
             },
         ],
@@ -195,7 +200,19 @@ if (!devMode) {
                         {
                             plugins: [
                                 {
-                                    removeViewBox: false,
+                                    name: 'preset-default',
+                                    params: {
+                                        overrides: {
+                                            // customize options for plugins included in preset
+                                            removeViewBox: {
+                                                active: 'false',
+                                            },
+                                            // or disable plugins
+                                            addAttributesToSVGElement: {
+                                                attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
+                                            },
+                                        },
+                                    },
                                 },
                             ],
                         },

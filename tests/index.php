@@ -16,8 +16,9 @@ require __DIR__ . '/functions.php';
 </head>
 
 <body>
+   <h1>I should be a Montserrat</h1>
    <div class="icon-logo-linkedin"></div>
-
+   <img src="<?php the_asset('images/logo.svg'); ?>" alt="">
 
    <script src="<?php the_asset('vendor.js'); ?>"></script>
    <script src="<?php the_asset('app.js'); ?>"></script>

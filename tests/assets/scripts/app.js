@@ -1,4 +1,4 @@
-import '../styles/01-settings/_vendor.scss';
+//import '../styles/01-settings/_vendor.scss';
 
 import { registerBlockStyle } from '@wordpress/blocks';
 import 'bootstrap/js/dist/collapse';
