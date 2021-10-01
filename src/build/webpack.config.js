@@ -48,6 +48,7 @@ const webpackConfig = {
                     loader: 'babel-loader',
                     options: {
                         cacheDirectory: true,
+                        presets: ['@babel/preset-env'],
                     },
                 },
             },
@@ -67,14 +68,10 @@ const webpackConfig = {
                     },
                     {
                         loader: 'css-loader',
-                        options: {
-                            sourceMap: CreateSourceMap,
-                        },
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
-                            sourceMap: CreateSourceMap,
                             postcssOptions: {
                                 config: path.resolve(__dirname, 'postcss.config.js'),
                             },
@@ -82,19 +79,21 @@ const webpackConfig = {
                     },
                     {
                         loader: 'sass-loader',
-                        options: {
-                            sourceMap: CreateSourceMap,
-                        },
                     },
                 ],
             },
             {
-                test: /\.(ttf|eot|woff2?|png|jpe?g|gif|svg|ico)$/,
-                include: config.path.urlLoaderAssets,
-                loader: 'url-loader',
-                options: {
-                    limit: 4096,
-                    name: devMode ? '[path][name].[ext]' : '[path][name].[contenthash].[ext]',
+                test: /\.(png|jpg|gif|svg)$/i,
+                type: 'asset',
+                generator: {
+                    filename: devMode ? '[path][name].[ext]' : '[path][name].[contenthash][ext]',
+                },
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf)$/,
+                type: 'asset',
+                generator: {
+                    filename: devMode ? '[path][name].[ext]' : '[path][name].[contenthash][ext]',
                 },
             },
         ],
@@ -111,6 +110,10 @@ const webpackConfig = {
     },
     externals: config.externals,
     plugins: [
+        new WebpackManifestPlugin({
+            publicPath: '',
+            useLegacyEmit: true,
+        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -119,12 +122,13 @@ const webpackConfig = {
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: devMode ? 'styles/[name].css' : 'styles/[name].[contenthash].css',
+            chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
         }),
         new CopyWebpackPlugin({
             patterns: [
                 {
                     from: config.path.assets + '/images',
-                    to: devMode ? 'images/[path][name].[ext]' : 'images/[path][name].[contenthash].[ext]',
+                    to: devMode ? 'images/[path][name][ext]' : 'images/[path][name].[contenthash][ext]',
                     globOptions: {
                         ignore: ['.gitkeep'],
                     },
@@ -142,10 +146,6 @@ const webpackConfig = {
                 variables: ['brand-colors'],
             },
         }),
-
-        new WebpackManifestPlugin({
-            publicPath: '',
-        }),
     ],
     optimization: {
         splitChunks: {
@@ -162,18 +162,8 @@ const webpackConfig = {
                 },
             },
         },
-        minimizer: [
-            new TerserPlugin({
-                cache: true,
-                parallel: true,
-                sourceMap: CreateSourceMap,
-                terserOptions: {
-                    output: {
-                        comments: false,
-                    },
-                },
-            }),
-        ],
+        minimize: true,
+        minimizer: [new TerserPlugin({})],
     },
 };
 
@@ -212,8 +202,19 @@ if (!devMode) {
                         {
                             plugins: extendDefaultPlugins([
                                 {
-                                    name: 'removeViewBox',
-                                    active: false,
+                                    name: 'preset-default',
+                                    params: {
+                                        overrides: {
+                                            // customize options for plugins included in preset
+                                            removeViewBox: {
+                                                active: 'false',
+                                            },
+                                            // or disable plugins
+                                            addAttributesToSVGElement: {
+                                                attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
+                                            },
+                                        },
+                                    },
                                 },
                             ]),
                         },
@@ -223,6 +224,7 @@ if (!devMode) {
         }),
     );
 }
+
 if (!config.skipDependencyExtraction) {
     webpackConfig.plugins.push(
         new DependencyExtractionWebpackPlugin({

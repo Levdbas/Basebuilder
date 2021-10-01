@@ -1,6 +1,7 @@
 # NPM #
 ##########
 node_modules
+/tests/vendor
 **/vendor/**
 **/node_modules/**
 **/.yarn/**

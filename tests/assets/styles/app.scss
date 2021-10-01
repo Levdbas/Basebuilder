@@ -4,6 +4,14 @@ $red: red;
    color:$red;
 }
 
-@import "ie-legacy";
+
+//@import "ie-legacy";
+@import "01-settings/variables";
+@import "01-settings/fonts";
 @import "../fonts/iconfont/icomoon";
-@import "../fonts/biennale/stylesheet";
+
+
+
+body{
+	font-family: "Montserrat";
+}

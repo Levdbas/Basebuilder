@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'development';
 global.watch = true;
 
 const webpack = require('webpack');
-const browserSync = require('browser-sync').create();
+var browserSync = require('browser-sync').create();
 const middleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const formatMessages = require('webpack-format-messages');
