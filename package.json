@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
@@ -44,7 +44,7 @@
         "imagemin-optipng": "^8.0",
         "imagemin-svgo": "^9.0",
         "mini-css-extract-plugin": "^2.3",
-        "palette-webpack-plugin": "^1.0.3",
+        "wordpress-palette-webpack-plugin": "^1.1.0",
         "postcss-loader": "^6.1",
         "sass": "^1.42",
         "sass-loader": "^12.1",
