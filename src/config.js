@@ -81,7 +81,7 @@ var config = merge(
             theme: path.join(rootPath, themePath), // from root folder path/to/theme
             dist: path.join(rootPath, themePath, 'dist'), // from root folder path/to/theme
             assets: path.join(rootPath, assetsPath), // from folder containing the package.json to the theme folder.
-            scssSettingsFolder: scssSettingsFolder,
+            scssSettingsFolder: path.join(rootPath, scssSettingsFolder),
             urlLoaderAssets: [path.join(rootPath, assetsPath)], // create path for the url-loader. When we have a parent/child theme going we'll add the parent theme assets later on.
             public: publicPath, // Used for webpack.output.publicpath - Had to be set this way to overcome middleware issues with dynamic path.
         },
