@@ -202,18 +202,13 @@ if (!devMode) {
                         {
                             plugins: extendDefaultPlugins([
                                 {
-                                    name: 'preset-default',
+                                    name: 'removeViewBox',
+                                    active: false,
+                                },
+                                {
+                                    name: 'addAttributesToSVGElement',
                                     params: {
-                                        overrides: {
-                                            // customize options for plugins included in preset
-                                            removeViewBox: {
-                                                active: 'false',
-                                            },
-                                            // or disable plugins
-                                            addAttributesToSVGElement: {
-                                                attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
-                                            },
-                                        },
+                                        attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
                                     },
                                 },
                             ]),
