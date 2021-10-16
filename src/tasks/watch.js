@@ -33,10 +33,14 @@ browserSync.init({
         ],
     },
 });
-compiler.hooks.done.tap('test', stats => {
-    const messages = formatMessages(stats);
 
+compiler.hooks.invalid.tap('invalid', function() {
     console.log(`\n${chalk.dim("Let's build and compile the files...")}`);
+});
+
+compiler.hooks.done.tap('done', stats => {
+    const messages = formatMessages(stats);
+    console.log(webpackConfig.output);
     if (!messages.errors.length && !messages.warnings.length) {
         console.log('\n✅ ', chalk.black.bgGreen(' Compiled successfully! \n'));
         console.log();
@@ -44,12 +48,12 @@ compiler.hooks.done.tap('test', stats => {
 
     if (messages.errors.length) {
         console.log('\n❌ ', chalk.black.bgRed(' Failed to compile build. \n'));
-        console.log('\n👉 ', messages.errors.join('\n\n'));
+        messages.errors.forEach(e => console.log('\n👉 ', e));
         return;
     }
 
     if (messages.warnings.length) {
-        console.log('\n❌ ', chalk.yellow(' Compiled with warnings. \n'));
-        console.log('\n👉 ', messages.warnings.join('\n\n'));
+        console.log('Compiled with warnings.');
+        messages.warnings.forEach(w => console.log('\n👉 ', w));
     }
 });

@@ -1,13 +1,11 @@
 //import '../styles/01-settings/_vendor.scss';
-
-import { registerBlockStyle } from '@wordpress/blocks';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/button';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/alert';
 import test from './test';
 import '../styles/app.scss';
-import '../styles/_ie-legacy.scss';
+
 (function($) {
     // Use this variable to set up the common and page specific functions. If you
     // rename this variable, you will also need to rename the namespace below.
@@ -17,11 +15,6 @@ import '../styles/_ie-legacy.scss';
             init: function() {
                 console.log('hi');
                 test();
-
-                registerBlockStyle('core/quote', {
-                    name: 'fancy-quote',
-                    label: 'Fancy Quote',
-                });
             },
             finalize: function() {
                 // JavaScript to be fired on all pages, after page specific JS is fired

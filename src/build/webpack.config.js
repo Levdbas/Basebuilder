@@ -43,7 +43,7 @@ const webpackConfig = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules[\/\\](?!(swiper|dom7|sal.js)[\/\\])/,
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: {
