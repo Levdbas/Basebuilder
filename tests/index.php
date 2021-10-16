@@ -13,6 +13,7 @@ require __DIR__ . '/functions.php';
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>HTML 5 Boilerplate</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -20,8 +21,8 @@ require __DIR__ . '/functions.php';
    <div class="icon-logo-linkedin"></div>
    <img src="<?php the_asset('images/logo.svg'); ?>" alt="">
 
-   <script src="<?php the_asset('vendor.js'); ?>"></script>
-   <script src="<?php the_asset('app.js'); ?>"></script>
+   <script type="text/javascript" src="<?php the_asset('vendor.js'); ?>"></script>
+   <script type="text/javascript" src="<?php the_asset('app.js'); ?>"></script>
 </body>
 
 </html>

@@ -7,5 +7,5 @@
     "rootToThemePath": "/tests/",
     "themePath": "/tests/",
     "scssSettingsFolder": "01-settings/",
-    "browserSyncURL": "http://wplemon2.local"
+    "browserSyncURL": "http://basebuilder-config.local/tests/"
 }

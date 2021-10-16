@@ -24,7 +24,7 @@ function get_asset($asset, string $return_variant = null)
                return file_get_contents(__DIR__ . '/dist/' . $file, true);
                break;
             default:
-               return "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . '/dist/' . $file;
+               return "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" . 'dist/' . $file;
                break;
          }
       } else {
