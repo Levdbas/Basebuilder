@@ -152,15 +152,6 @@ const webpackConfig = {
             chunks: 'all',
             automaticNameDelimiter: '-',
             name: 'vendor',
-            cacheGroups: {
-                vendorBase: {
-                    test: /_ie-legacy.scss/,
-                    name: 'ie-legacy',
-                    chunks: 'all',
-                    enforce: true,
-                    reuseExistingChunk: false,
-                },
-            },
         },
         minimizer: [new TerserPlugin({})],
     },

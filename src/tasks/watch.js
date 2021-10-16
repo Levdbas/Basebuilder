@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'development';
+global.watch = true;
 
 const webpack = require('webpack');
 var browserSync = require('browser-sync').create();
@@ -21,7 +22,9 @@ browserSync.init({
                 stats: false,
             }),
             webpackHotMiddleware(compiler, {
-                reload: true,
+                log: false,
+                path: '/__webpack_hmr',
+                heartbeat: 10 * 1000,
             }),
         ],
     },
