@@ -13,7 +13,6 @@ import '../styles/app.scss';
         // All pages
         common: {
             init: function() {
-                console.log('hi');
                 test();
             },
             finalize: function() {

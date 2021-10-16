@@ -1,6 +1,4 @@
-process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
-global.watch = true;
 
 const webpack = require('webpack');
 var browserSync = require('browser-sync').create();
@@ -21,14 +19,9 @@ browserSync.init({
             middleware(compiler, {
                 publicPath: webpackConfig.output.publicPath,
                 stats: false,
-                writeToDisk: filePath => {
-                    return /^(?!.*(hot-update)).*/.test(filePath);
-                },
             }),
             webpackHotMiddleware(compiler, {
-                log: false,
-                path: '/__webpack_hmr',
-                heartbeat: 10 * 1000,
+                reload: true,
             }),
         ],
     },
@@ -40,7 +33,7 @@ compiler.hooks.invalid.tap('invalid', function() {
 
 compiler.hooks.done.tap('done', stats => {
     const messages = formatMessages(stats);
-    console.log(webpackConfig.output);
+
     if (!messages.errors.length && !messages.warnings.length) {
         console.log('\n✅ ', chalk.black.bgGreen(' Compiled successfully! \n'));
         console.log();
