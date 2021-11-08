@@ -4,9 +4,7 @@ const { merge } = require('webpack-merge');
 const chalk = require('chalk');
 const watchMode = global.watch || false;
 
-const { program } = require('commander');
-program.parse(process.argv);
-const options = program.opts();
+const options = process.argv;
 var userConfigPath = '/assets/config.json';
 
 /**
@@ -121,7 +119,7 @@ if (watchMode) {
 /**
  * Pushes our entry file to the start of the entry array.
  */
-if (options.isTestRun) {
+if (options.indexOf('--isTestRun') === 1) {
     config.entry.app.unshift('../../src/helpers/publicpath-entry.js');
 } else {
     config.entry.app.unshift('basebuilder-config/src/helpers/publicpath-entry.js');
