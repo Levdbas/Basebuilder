@@ -31,6 +31,9 @@ const webpackConfig = {
     entry: config.entry,
     devtool: CreateSourceMap ? 'inline-cheap-module-source-map' : false,
     watch: watchMode,
+    watchOptions: {
+        ignored: ['*.sys', '*.log.tmp', '**/*.sys', '**/*.log.tmp', '**/node_modules'],
+    },
     output: {
         filename: devMode ? 'scripts/[name].js' : 'scripts/[name].[contenthash].js',
         chunkFilename: devMode ? 'scripts/[name].bundle.js' : 'scripts/[name].bundle.[contenthash].js',
