@@ -94,7 +94,7 @@ const webpackConfig = {
             },
             {
                 test: /\.(woff|woff2|eot|ttf)$/,
-                type: 'asset',
+                type: 'asset/resource',
                 generator: {
                     filename: devMode ? '[path][name].[ext]' : '[path][name].[contenthash][ext]',
                 },
@@ -152,7 +152,6 @@ const webpackConfig = {
     ],
     optimization: {
         splitChunks: {
-            chunks: 'all',
             automaticNameDelimiter: '-',
             name: 'vendor',
         },
