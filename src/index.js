@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// Update notifier.
+// Update notifier..
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
 const { version } = require('../package.json');
