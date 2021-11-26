@@ -152,6 +152,7 @@ const webpackConfig = {
     ],
     optimization: {
         splitChunks: {
+            chunks: 'all',
             automaticNameDelimiter: '-',
             name: 'vendor',
         },
