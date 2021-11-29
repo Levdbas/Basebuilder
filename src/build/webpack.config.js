@@ -18,7 +18,6 @@ const imageminOptipng = require('imagemin-optipng');
 const imageminSvgo = require('imagemin-svgo');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const { merge } = require('webpack-merge');
 const { VueLoaderPlugin } = require('vue-loader');
 const PalettePlugin = require('wordpress-palette-webpack-plugin');
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
@@ -193,18 +192,18 @@ if (!devMode) {
                     [
                         'svgo',
                         {
-                            plugins: extendDefaultPlugins([
-                                {
-                                    name: 'removeViewBox',
-                                    active: false,
-                                },
-                                {
-                                    name: 'addAttributesToSVGElement',
-                                    params: {
-                                        attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
+                            name: 'preset-default',
+                            params: {
+                                overrides: {
+                                    // customize options for plugins included in preset
+                                    addAttributesToSVGElement: {
+                                        params: {
+                                            attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
+                                        },
                                     },
+                                    removeViewBox: false,
                                 },
-                            ]),
+                            },
                         },
                     ],
                 ],

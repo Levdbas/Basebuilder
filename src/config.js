@@ -119,7 +119,7 @@ if (watchMode) {
 /**
  * Pushes our entry file to the start of the entry array.
  */
-if (options.indexOf('--isTestRun') === 1) {
+if (options.includes('--isTestRun')) {
     config.entry.app.unshift('../../src/helpers/publicpath-entry.js');
 } else {
     config.entry.app.unshift('basebuilder-config/src/helpers/publicpath-entry.js');
