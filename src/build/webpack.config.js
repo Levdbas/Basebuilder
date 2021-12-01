@@ -101,6 +101,7 @@ const webpackConfig = {
         ],
     },
     resolve: {
+        modules: [path.resolve(__dirname, config.path.theme + '/node_modules')],
         alias: {
             acfBlocks: path.resolve(__dirname, config.path.theme + '/partials/blocks'),
             twigBlocks: path.resolve(__dirname, config.path.theme + '/resources/views/blocks'),
