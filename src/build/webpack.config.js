@@ -88,14 +88,14 @@ const webpackConfig = {
                 test: /\.(png|jpg|gif|svg)$/i,
                 type: 'asset',
                 generator: {
-                    filename: devMode ? '[path][name].[ext]' : '[path][name].[contenthash][ext]',
+                    filename: devMode ? 'images/[name].[ext]' : 'images/[name].[contenthash][ext]',
                 },
             },
             {
                 test: /\.(woff|woff2|eot|ttf)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: devMode ? '[path][name].[ext]' : '[path][name].[contenthash][ext]',
+                    filename: devMode ? 'fonts/[name].[ext]' : 'fonts/[name].[contenthash][ext]',
                 },
             },
         ],
