@@ -2,6 +2,7 @@
  * Assets Config file
  */
 process.noDeprecation = true;
+const rootPath = process.cwd();
 const env = process.env.NODE_ENV;
 const devMode = process.env.NODE_ENV !== 'production';
 const watchMode = global.watch || false;
@@ -11,11 +12,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-const { extendDefaultPlugins } = require('svgo');
-const imageminGifsicle = require('imagemin-gifsicle');
-const imageminJpegtran = require('imagemin-jpegtran');
-const imageminOptipng = require('imagemin-optipng');
-const imageminSvgo = require('imagemin-svgo');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
@@ -101,7 +97,7 @@ const webpackConfig = {
         ],
     },
     resolve: {
-        modules: [path.resolve(__dirname, config.path.theme + '/node_modules')],
+        modules: [path.resolve(rootPath + '/node_modules')],
         alias: {
             acfBlocks: path.resolve(__dirname, config.path.theme + '/partials/blocks'),
             twigBlocks: path.resolve(__dirname, config.path.theme + '/resources/views/blocks'),
@@ -156,7 +152,38 @@ const webpackConfig = {
             automaticNameDelimiter: '-',
             name: 'vendor',
         },
-        minimizer: [new TerserPlugin({})],
+        minimizer: [
+            new ImageMinimizerPlugin({
+                minimizer: {
+                    implementation: ImageMinimizerPlugin.imageminMinify,
+                    options: {
+                        // Lossless optimization with custom option
+                        // Feel free to experement with options for better result for you
+                        plugins: [
+                            ['mozjpeg', { quality: 100 }],
+                            ['optipng', { optimizationLevel: 1 }],
+                            [
+                                'svgo',
+                                {
+                                    name: 'preset-default',
+                                    params: {
+                                        overrides: {
+                                            // customize options for plugins included in preset
+                                            addAttributesToSVGElement: {
+                                                params: {
+                                                    attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
+                                                },
+                                            },
+                                            removeViewBox: false,
+                                        },
+                                    },
+                                },
+                            ],
+                        ],
+                    },
+                },
+            }),
+        ],
     },
 };
 
@@ -180,37 +207,7 @@ if (watchMode) {
  * @return {object}           updated webpackConfig configuration object.
  */
 if (!devMode) {
-    webpackConfig.plugins.push(
-        new CleanWebpackPlugin(),
-        new ImageMinimizerPlugin({
-            minimizerOptions: {
-                // Lossless optimization with custom option
-                // Feel free to experement with options for better result for you
-                plugins: [
-                    ['gifsicle', { interlaced: true }],
-                    ['jpegtran', { progressive: true }],
-                    ['optipng', { optimizationLevel: 1 }],
-                    [
-                        'svgo',
-                        {
-                            name: 'preset-default',
-                            params: {
-                                overrides: {
-                                    // customize options for plugins included in preset
-                                    addAttributesToSVGElement: {
-                                        params: {
-                                            attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
-                                        },
-                                    },
-                                    removeViewBox: false,
-                                },
-                            },
-                        },
-                    ],
-                ],
-            },
-        }),
-    );
+    webpackConfig.plugins.push(new CleanWebpackPlugin());
 }
 
 if (!config.skipDependencyExtraction) {
