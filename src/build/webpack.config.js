@@ -153,6 +153,9 @@ const webpackConfig = {
             name: 'vendor',
         },
         minimizer: [
+            new TerserPlugin({
+                parallel: true,
+            }),
             new ImageMinimizerPlugin({
                 minimizer: {
                     implementation: ImageMinimizerPlugin.imageminMinify,
