@@ -168,18 +168,22 @@ const webpackConfig = {
                             [
                                 'svgo',
                                 {
-                                    name: 'preset-default',
-                                    params: {
-                                        overrides: {
-                                            // customize options for plugins included in preset
-                                            addAttributesToSVGElement: {
-                                                params: {
-                                                    attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
+                                    plugins: [
+                                        {
+                                            name: 'preset-default',
+                                            params: {
+                                                overrides: {
+                                                    // customize options for plugins included in preset
+                                                    addAttributesToSVGElement: {
+                                                        params: {
+                                                            attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
+                                                        },
+                                                    },
+                                                    removeViewBox: false,
                                                 },
                                             },
-                                            removeViewBox: false,
                                         },
-                                    },
+                                    ],
                                 },
                             ],
                         ],
