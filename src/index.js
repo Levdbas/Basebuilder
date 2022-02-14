@@ -3,10 +3,11 @@
 // Update notifier..
 const chalk = require('chalk');
 const updateNotifier = require('update-notifier');
-const { version } = require('../package.json');
-const pkg = require('../package.json');
-const { program } = require('commander');
 
+const { program } = require('commander');
+const pkg = require('../package.json');
+const { version } = require('../package.json');
+const commandName = 'Basebuilder';
 const notifier = updateNotifier({
     pkg,
     shouldNotifyInNpmScript: true,
@@ -26,30 +27,28 @@ if (notifier.update !== undefined) {
     });
 }
 
-program
-    .name('basebuilder-config')
-    .description('Webpack config for WordPress projects.\n\n')
-    .option('-t, --isTestRun', 'Run in test mode')
-    .version(version);
-
+program.name(commandName).description('Webpack config for WordPress projects.\n\n').option('-t, --isTestRun', 'Run in test mode').version(version);
 program
     .command('development')
     .description('Build assets once for development.')
-    .action(options => {
+    .action((name, options, command) => {
+        console.log(`Running ${commandName} ${version}`);
         require('./tasks/development');
     });
 
 program
     .command('watch')
     .description('Serve assets and proxy website with browsersync.')
-    .action(options => {
+    .action((name, options, command) => {
+        console.log(`Running ${commandName} ${version}`);
         require('./tasks/watch');
     });
 
 program
     .command('production', { isDefault: true })
     .description('Build assets optimized for production.')
-    .action(options => {
+    .action((name, options, command) => {
+        console.log(`Running ${commandName} ${version}`);
         require('./tasks/production');
     });
 
