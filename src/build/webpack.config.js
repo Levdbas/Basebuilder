@@ -53,6 +53,13 @@ const webpackConfig = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
+                options: {
+                    compilerOptions: {
+                        compatConfig: {
+                            MODE: 2,
+                        },
+                    },
+                },
             },
             {
                 test: /\.scss$/,
@@ -99,6 +106,7 @@ const webpackConfig = {
     resolve: {
         modules: [path.resolve(rootPath + '/node_modules')],
         alias: {
+            vue: '@vue/compat',
             acfBlocks: path.resolve(__dirname, config.path.theme + '/partials/blocks'),
             twigBlocks: path.resolve(__dirname, config.path.theme + '/resources/views/blocks'),
             parentThemeStyles: path.resolve(__dirname, config.path.parentThemeAssets + 'styles'),
