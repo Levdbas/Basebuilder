@@ -144,8 +144,10 @@ const webpackConfig = {
         }),
 
         new PalettePlugin({
-            output: 'palette.json',
+            output: 'theme.json',
+            output_prepend: '../',
             blacklist: ['transparent', 'inherit'],
+            wp_theme_json: true,
             pretty: false,
             sass: {
                 path: config.path.scssSettingsFolder,

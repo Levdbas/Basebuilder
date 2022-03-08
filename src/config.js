@@ -14,7 +14,6 @@ var userConfigPath = '/assets/config.json';
 if (process.env.npm_package_config_userConfig) {
     userConfigPath = process.env.npm_package_config_userConfig;
 }
-
 /**
  * Checks if userConfigPath file exists.
  */

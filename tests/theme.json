@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 1,
+  "settings": {
+    "border": {
+      "customRadius": false
+    },
+    "spacing": {
+      "customPadding": false,
+      "customMargin": false
+    },
+    "layout": {
+      "contentSize": "1100px",
+      "wideSize": "1400px"
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+          "slug": "system-fonts",
+          "name": "System fonts"
+        },
+        {
+          "fontFamily": "Helvetica Neue, Helvetica, Arial, sans-serif",
+          "slug": "helvetica-arial",
+          "name": "Helvetica or Arial"
+        }
+      ]
+    },
+    "color": {
+      "palette": [
+        {
+          "name": "White",
+          "slug": "white",
+          "color": "#ffffff"
+        },
+        {
+          "name": "Black",
+          "slug": "black",
+          "color": "#000000"
+        },
+        {
+          "name": "Gray",
+          "slug": "gray",
+          "color": "#f3f3f3"
+        },
+        {
+          "name": "Yellow",
+          "slug": "yellow",
+          "color": "#f7d600"
+        }
+      ]
+    }
+  }
+}
