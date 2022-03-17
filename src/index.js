@@ -37,12 +37,7 @@ program
     });
 
 program
-    .command('watch')
-    .description('Serve assets and proxy website with browsersync.')
-    .action((name, options, command) => {
-        console.log(`Running ${commandName} ${version}`);
-        require('./tasks/watch');
-    });
+    .command('watch', 'Serve assets and proxy website with browsersync.', { executableFile: './tasks/watch' });
 
 program
     .command('production', { isDefault: true })

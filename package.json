@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "2.6.0",
+    "version": "2.6.1",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
@@ -18,9 +18,9 @@
         "userConfig": "/tests/assets/config.json"
     },
     "scripts": {
-        "test-dev": "src/index.js development --isTestRun",
-        "test-production": "node src/index.js production --isTestRun",
-        "test-watch": "node src/index.js watch --isTestRun"
+        "test-dev": "src/index.js development",
+        "test-production": "node src/index.js production",
+        "test-watch": "node src/index.js watch"
     },
     "dependencies": {
         "@babel/core": "^7.17",
