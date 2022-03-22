@@ -33,7 +33,7 @@ browserSync.init({
     },
 });
 
-compiler.hooks.invalid.tap('invalid', function() {
+compiler.hooks.invalid.tap('invalid', function () {
     console.log(`\n${chalk.dim("Let's build and compile the files...")}`);
 });
 
