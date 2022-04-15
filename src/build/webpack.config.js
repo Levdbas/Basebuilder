@@ -118,7 +118,6 @@ const webpackConfig = {
     plugins: [
         new WebpackManifestPlugin({
             publicPath: '',
-            useLegacyEmit: true,
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -136,7 +135,9 @@ const webpackConfig = {
                     from: config.path.assets + '/images',
                     to: devMode ? 'images/[path][name][ext]' : 'images/[path][name].[contenthash][ext]',
                     globOptions: {
-                        ignore: ['.gitkeep'],
+                        dot: true,
+                        gitignore: true,
+                        ignore: ['**/.gitkeep'],
                     },
                 },
             ],
