@@ -18,7 +18,6 @@ browserSync.init({
         target: config.browserSyncURL,
         middleware: [
             middleware(compiler, {
-                publicPath: webpackConfig.output.publicPath,
                 stats: false,
                 writeToDisk: filePath => {
                     return /^(?!.*(hot-update)).*/.test(filePath);
@@ -26,14 +25,12 @@ browserSync.init({
             }),
             webpackHotMiddleware(compiler, {
                 log: false,
-                path: '/__webpack_hmr',
-                heartbeat: 10 * 1000,
             }),
         ],
     },
 });
 
-compiler.hooks.invalid.tap('invalid', function () {
+compiler.hooks.invalid.tap('compile', function () {
     console.log(`\n${chalk.dim("Let's build and compile the files...")}`);
 });
 

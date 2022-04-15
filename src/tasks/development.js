@@ -6,13 +6,9 @@ const webpackConfig = require('../build/webpack.config');
 const compiler = webpack(webpackConfig);
 const formatMessages = require('webpack-format-messages');
 const chalk = require('chalk');
-const fileSize = require('../helpers/fileSize');
 
 compiler.run((err, stats) => {
     const messages = formatMessages(stats);
-    const my_stats = stats.toJson('verbose');
-    const assets = my_stats.assets;
-    var totalSize = 0;
 
     console.log(`\n${chalk.dim("Let's build and compile the files...")}`);
     if (!messages.errors.length && !messages.warnings.length) {
