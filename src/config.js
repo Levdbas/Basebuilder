@@ -3,7 +3,7 @@ const rootPath = process.cwd();
 const { merge } = require('webpack-merge');
 const chalk = require('chalk');
 const watchMode = global.watch || false;
-
+var fs = require('fs');
 const options = process.argv;
 var userConfigPath = '/assets/config.json';
 
@@ -88,6 +88,8 @@ var config = merge(
     userConfig,
 );
 
+blockPath[path.join(rootPath, assetsPath, 'scripts', 'blocks')]
+
 /**
  * When we are running themes in a parent/child
  * setup we add extra paths to the config.path var.
@@ -106,6 +108,8 @@ if (userConfig['parentTheme']) {
      * Add parent theme assets folder when we actually use a parent/child setup.
      */
     config.path.urlLoaderAssets.push(config.path.parentThemeAssets);
+
+    blockPaths = [path.join(config.path.parentThemeAssets, 'scripts', 'blocks')];
 }
 
 /**
@@ -120,4 +124,14 @@ if (watchMode) {
  */
 config.entry.app.unshift(__dirname + '/helpers/publicpath-entry.js');
 
+
+if (fs.existsSync(blockPath)) {
+    var files = fs.readdirSync(path.join(rootPath, assetsPath, 'scripts', 'blocks'));
+    files.forEach(function (file) {
+        var filePath = path.join('./', 'scripts', 'blocks', file);
+        filename = file.replace('.js', '');
+        filePath = './' + filePath;
+        config.entry[filename] = filePath;
+    });
+}
 module.exports = config;

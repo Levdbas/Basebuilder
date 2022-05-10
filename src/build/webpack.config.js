@@ -9,7 +9,6 @@ const watchMode = global.watch || false;
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
@@ -35,6 +34,7 @@ const webpackConfig = {
         path: config.path.dist,
         publicPath: config.path.public,
         pathinfo: false,
+        clean: true
     },
     performance: { hints: false },
     module: {
@@ -122,7 +122,6 @@ const webpackConfig = {
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-            'window.jQuery': 'jquery',
         }),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
@@ -159,8 +158,14 @@ const webpackConfig = {
     optimization: {
         splitChunks: {
             chunks: 'all',
-            automaticNameDelimiter: '-',
-            name: 'vendor',
+            cacheGroups: {
+                defaultVendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10,
+                    name: 'vendor',
+                    minChunks: 2,
+                },
+            }
         },
         minimizer: [
             new TerserPlugin({
@@ -215,16 +220,6 @@ const webpackConfig = {
  */
 if (watchMode) {
     webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-}
-
-/**
- * Production mode specific plugins.
- * @since 1.4
- * @param  {boolean} devMode if development mode is enabled in Webpack
- * @return {object}           updated webpackConfig configuration object.
- */
-if (!devMode) {
-    webpackConfig.plugins.push(new CleanWebpackPlugin());
 }
 
 if (!config.skipDependencyExtraction) {
