@@ -88,8 +88,6 @@ var config = merge(
     userConfig,
 );
 
-blockPath[path.join(rootPath, assetsPath, 'scripts', 'blocks')]
-
 /**
  * When we are running themes in a parent/child
  * setup we add extra paths to the config.path var.
@@ -109,7 +107,7 @@ if (userConfig['parentTheme']) {
      */
     config.path.urlLoaderAssets.push(config.path.parentThemeAssets);
 
-    blockPaths = [path.join(config.path.parentThemeAssets, 'scripts', 'blocks')];
+    //blockPaths = [path.join(config.path.parentThemeAssets, 'scripts', 'blocks')];
 }
 
 /**
@@ -125,7 +123,7 @@ if (watchMode) {
 config.entry.app.unshift(__dirname + '/helpers/publicpath-entry.js');
 
 
-if (fs.existsSync(blockPath)) {
+/* if (fs.existsSync(blockPaths)) {
     var files = fs.readdirSync(path.join(rootPath, assetsPath, 'scripts', 'blocks'));
     files.forEach(function (file) {
         var filePath = path.join('./', 'scripts', 'blocks', file);
@@ -133,5 +131,5 @@ if (fs.existsSync(blockPath)) {
         filePath = './' + filePath;
         config.entry[filename] = filePath;
     });
-}
+} */
 module.exports = config;
