@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "2.9.0",
+    "version": "2.9.1",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
@@ -49,7 +49,6 @@
         "sass": "^1.54",
         "sass-loader": "^13.0",
         "style-loader": "^3.3",
-        "stylelint": "^14.11",
         "stylelint-basebuilder": "^1.2",
         "terser-webpack-plugin": "^5.3",
         "update-notifier": "^5.1",
