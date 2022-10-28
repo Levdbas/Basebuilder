@@ -178,7 +178,7 @@ const webpackConfig = {
                         // Lossless optimization with custom option
                         // Feel free to experement with options for better result for you
                         plugins: [
-                            ['mozjpeg', { quality: 100 }],
+                            ["jpegtran", { progressive: true }],
                             ['optipng', { optimizationLevel: 1 }],
                             [
                                 'svgo',
