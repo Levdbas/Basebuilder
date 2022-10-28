@@ -18,7 +18,7 @@
         "userConfig": "/tests/assets/config.json"
     },
     "scripts": {
-        "test-dev": "src/index.js development",
+        "test-dev": "node src/index.js development",
         "test-production": "node src/index.js production",
         "test-watch": "node src/index.js watch"
     },
