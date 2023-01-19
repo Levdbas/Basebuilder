@@ -165,38 +165,37 @@ const webpackConfig = {
                 parallel: true,
             }),
             new ImageMinimizerPlugin({
-                minimizer: {
-                    implementation: ImageMinimizerPlugin.imageminMinify,
-                    options: {
-                        // Lossless optimization with custom option
-                        // Feel free to experement with options for better result for you
-                        plugins: [
-                            ["jpegtran", { progressive: true }],
-                            ['optipng', { optimizationLevel: 1 }],
-                            [
-                                'svgo',
-                                {
-                                    plugins: [
-                                        {
-                                            name: 'preset-default',
-                                            params: {
-                                                overrides: {
-                                                    // customize options for plugins included in preset
-                                                    addAttributesToSVGElement: {
-                                                        params: {
-                                                            attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
-                                                        },
-                                                    },
-                                                    removeViewBox: false,
-                                                },
-                                            },
-                                        },
-                                    ],
-                                },
-                            ],
-                        ],
+                minimizer: [
+                    {
+                        // `sharp` will handle all bitmap formats (JPG, PNG, GIF, ...)
+                        implementation: ImageMinimizerPlugin.sharpMinify,
+
+                        // exclude SVG if implementation support it. Not required for `sharp`.
+                        // filter: (source, sourcePath) => !(/\.(svg)$/i.test(sourcePath)),
+
+                        options: {
+                            encodeOptions: {
+                                // Your options for `sharp`
+                                // https://sharp.pixelplumbing.com/api-output
+                            },
+                        },
                     },
-                },
+                    {
+                        // `svgo` will handle vector images (SVG)
+                        implementation: ImageMinimizerPlugin.svgoMinify,
+                        options: {
+                            encodeOptions: {
+                                // Pass over SVGs multiple times to ensure all optimizations are applied. False by default
+                                multipass: true,
+                                plugins: [
+                                    // set of built-in plugins enabled by default
+                                    // see: https://github.com/svg/svgo#default-preset
+                                    "preset-default",
+                                ],
+                            },
+                        },
+                    },
+                ],
             }),
         ],
     },
