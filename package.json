@@ -8,7 +8,7 @@
     "bin": "./src/index.js",
     "homepage": "https://github.com/Levdbas/Basebuilder",
     "engines": {
-        "node": ">=14.0"
+        "node": ">=16.0"
     },
     "files": [
         "src",
