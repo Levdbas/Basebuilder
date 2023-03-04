@@ -99,8 +99,8 @@ const webpackConfig = {
         modules: [path.resolve(rootPath + '/node_modules')],
         alias: {
             vue: '@vue/compat',
-            acfBlocks: path.resolve(__dirname, config.path.theme + '/partials/blocks'),
-            twigBlocks: path.resolve(__dirname, config.path.theme + '/resources/views/blocks'),
+            blocks: path.resolve(__dirname, config.path.theme + '/blocks'),
+            parentThemeBlocks: path.resolve(__dirname, config.path.parentTheme + '/blocks'),
             parentThemeStyles: path.resolve(__dirname, config.path.parentThemeAssets + 'styles'),
             parentThemeScripts: path.resolve(__dirname, config.path.parentThemeAssets + 'scripts'),
             parentThemeFonts: path.resolve(__dirname, config.path.parentThemeAssets + 'fonts'),
