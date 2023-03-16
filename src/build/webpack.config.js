@@ -185,13 +185,15 @@ const webpackConfig = {
                         implementation: ImageMinimizerPlugin.svgoMinify,
                         options: {
                             encodeOptions: {
-                                // Pass over SVGs multiple times to ensure all optimizations are applied. False by default
                                 multipass: true,
-                                plugins: [
-                                    // set of built-in plugins enabled by default
-                                    // see: https://github.com/svg/svgo#default-preset
-                                    "preset-default",
-                                ],
+                                plugins: [{
+                                    name: "preset-default",
+                                    params: {
+                                        overrides: {
+                                            removeViewBox: false,
+                                        },
+                                    },
+                                }]
                             },
                         },
                     },
