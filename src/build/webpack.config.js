@@ -126,6 +126,7 @@ const webpackConfig = {
                 {
                     from: config.path.assets + '/images',
                     to: devMode ? 'images/[path][name][ext]' : 'images/[path][name].[contenthash][ext]',
+                    noErrorOnMissing: true,
                     globOptions: {
                         dot: true,
                         gitignore: true,
