@@ -22,7 +22,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.21.0.tgz#c241dc454e5b5917e40d37e525e2f4530c399298"
   integrity sha512-gMuZsmsgxk/ENC3O/fRw5QY8A9/uxQbbCEypnLIiYYc/qVJtEV7ouxC3EllIIwNzMqAQee5tanFabWsUOutS7g==
 
-"@babel/core@^7.21":
+"@babel/core@^7.21", "@babel/core@^7.21.3":
   version "7.21.3"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.21.3.tgz#cf1c877284a469da5d1ce1d1e53665253fae712e"
   integrity sha512-qIJONzoa/qiHghnm0l1n4i/6IIziDpzqc36FBs4pzMhDUraHqponwJLiAKm1hGLP3OSB/TVNz6rMwVGpwxxySw==
@@ -772,7 +772,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.18.6"
     "@babel/helper-plugin-utils" "^7.18.6"
 
-"@babel/preset-env@^7.20":
+"@babel/preset-env@^7.20", "@babel/preset-env@^7.20.2":
   version "7.20.2"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.20.2.tgz#9b1642aa47bb9f43a86f9630011780dab7f86506"
   integrity sha512-1G0efQEWR1EHkKvKHqbG+IN/QdgwfByUpM5V5QroDzGV2t3S/WXNQd693cHiHTlCFMpr9B6FkPFXDA2lQcKoDg==
@@ -1486,7 +1486,7 @@ axios@0.21.4:
   dependencies:
     follow-redirects "^1.14.0"
 
-babel-loader@^9.1:
+babel-loader@^9.1, babel-loader@^9.1.2:
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-9.1.2.tgz#a16a080de52d08854ee14570469905a5fc00d39c"
   integrity sha512-mN14niXW43tddohGl8HPu5yfQq70iUThvFL/4QzESA7GcZoC0eVOhvWdQ8+3UlSjaDE9MVtsW9mxDY07W7VpVA==
@@ -1596,21 +1596,24 @@ braces@^3.0.2, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-browser-sync-client@^2.28.3:
-  version "2.28.3"
-  resolved "https://registry.yarnpkg.com/browser-sync-client/-/browser-sync-client-2.28.3.tgz#cc9c35430235c131b3ab15138f1d8ef2b204b9a4"
-  integrity sha512-SMsnGkyXlySVLBWRrXdnTdtQCy0Sl5UoiF8BVtigj9S49DaPWQiesbsyq+uJBUKgpyNve+cvfpBU3KSfIp6oLQ==
+browser-sync-client@^2.29.0:
+  version "2.29.0"
+  resolved "https://registry.yarnpkg.com/browser-sync-client/-/browser-sync-client-2.29.0.tgz#80d91eabdc1f3c183aa233eaa8ed69efd5433f4d"
+  integrity sha512-2nKb/MMIkaXNiHADhr5m+OSV0TCMn3P84xXVq2YY6HSrXrXCIHCmI/DgCMi3zJasmrxtducB6rx4AtykWrHz8Q==
   dependencies:
+    "@babel/core" "^7.21.3"
+    "@babel/preset-env" "^7.20.2"
+    babel-loader "^9.1.2"
     etag "1.8.1"
     fresh "0.5.2"
     mitt "^1.1.3"
     rxjs "^5.5.6"
     typescript "^4.6.2"
 
-browser-sync-ui@^2.28.3:
-  version "2.28.3"
-  resolved "https://registry.yarnpkg.com/browser-sync-ui/-/browser-sync-ui-2.28.3.tgz#6ed7469a9d557e04c264106cbeb7032fc175f09d"
-  integrity sha512-Mj5M+O3jroGp5hlO6pDfUo19wzUTIuvGyzaRrJAYUgsSkpFacrX+MLCjN9VbZm9fYXbtHyIsnIUUIlYag87wgQ==
+browser-sync-ui@^2.29.0:
+  version "2.29.0"
+  resolved "https://registry.yarnpkg.com/browser-sync-ui/-/browser-sync-ui-2.29.0.tgz#292c81a81c47c4ca55ccbe99c27a1eb90cadaeef"
+  integrity sha512-wrbU8dvlOkxoSDif3Q12IF/BXs2qVqH8cuGBgsvGFqASAQly42Jf2cp8UAZPq0Y07p0InPEnAaEgzRkhxfHKJg==
   dependencies:
     async-each-series "0.1.1"
     chalk "4.1.2"
@@ -1620,13 +1623,13 @@ browser-sync-ui@^2.28.3:
     socket.io-client "^4.4.1"
     stream-throttle "^0.1.3"
 
-browser-sync@^2.28:
-  version "2.28.3"
-  resolved "https://registry.yarnpkg.com/browser-sync/-/browser-sync-2.28.3.tgz#ff4c4a7b8e905f20d5ff517ecb0b4ba82c234896"
-  integrity sha512-gublDeevvAuypnc01SQNGL8fkm4RdIkEagnAJ8Tl9mvr2td3Pl4nVIg5S6fcgoMDEWb8IT7nUHG9YwTATn/k2g==
+browser-sync@^2.29:
+  version "2.29.0"
+  resolved "https://registry.yarnpkg.com/browser-sync/-/browser-sync-2.29.0.tgz#d7640742418ba9d5ea00bf68f746be1d88d3e295"
+  integrity sha512-If5snHp16ql9jd0rzGCrwX2x2N+YTjW6Ggy1h+XxNxUW3Aeaq2FbLu8p9W9+vKJ9vLTrJqpp9waFyU/rmBBxmw==
   dependencies:
-    browser-sync-client "^2.28.3"
-    browser-sync-ui "^2.28.3"
+    browser-sync-client "^2.29.0"
+    browser-sync-ui "^2.29.0"
     bs-recipes "1.3.4"
     bs-snippet-injector "^2.0.1"
     chalk "4.1.2"
@@ -4634,23 +4637,17 @@ stylehacks@^5.1.1:
     browserslist "^4.21.4"
     postcss-selector-parser "^6.0.4"
 
-stylelint-basebuilder@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/stylelint-basebuilder/-/stylelint-basebuilder-2.0.1.tgz#bd7891425a06ddbf811838ed4fb04f1ad629d84e"
-  integrity sha512-OEGTxILJZHLQHwIwb+BOwQsF04gwzRQnDi73Mc9nnKfKkmMkDcL5UJ8LwhVlcCLMLD6uH+gQZft+M2pX1OemJQ==
+stylelint-basebuilder@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/stylelint-basebuilder/-/stylelint-basebuilder-2.1.0.tgz#52f1b90c46b07b0742d67e65acafedf8570c2355"
+  integrity sha512-fCsz2/1YTmG2jcfJyDoVmqMrDYkt8LBdmFlyGvUDDz0ipwQKe3B/40bXyoU+jVwX2kl50loB05Mz+RPReu8gUA==
   dependencies:
     postcss-scss "^4.0.6"
-    stylelint-config-prettier "^9.0"
     stylelint-config-recess-order "^4.0.0"
-    stylelint-config-standard "^30.0"
+    stylelint-config-standard "^31.0"
     stylelint-config-standard-scss "^7.0.1"
     stylelint-order "^6.0"
     stylelint-prettier "^3.0.0"
-
-stylelint-config-prettier@^9.0:
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/stylelint-config-prettier/-/stylelint-config-prettier-9.0.5.tgz#9f78bbf31c7307ca2df2dd60f42c7014ee9da56e"
-  integrity sha512-U44lELgLZhbAD/xy/vncZ2Pq8sh2TnpiPvo38Ifg9+zeioR+LAkHu0i6YORIOxFafZoVg0xqQwex6e6F25S5XA==
 
 stylelint-config-recess-order@^4.0.0:
   version "4.0.0"
@@ -4673,6 +4670,11 @@ stylelint-config-recommended@^10.0.1:
   resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-10.0.1.tgz#25a8828acf6cde87dac6db2950c8c4ed82a69ae1"
   integrity sha512-TQ4xQ48tW4QSlODcti7pgSRqBZcUaBzuh0jPpfiMhwJKBPkqzTIAU+IrSWL/7BgXlOM90DjB7YaNgFpx8QWhuA==
 
+stylelint-config-recommended@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-11.0.0.tgz#b1cb7d71bd92f9b8593f93c2ca6df16ed7d61522"
+  integrity sha512-SoGIHNI748OCZn6BxFYT83ytWoYETCINVHV3LKScVAWQQauWdvmdDqJC5YXWjpBbxg2E761Tg5aUGKLFOVhEkA==
+
 stylelint-config-standard-scss@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/stylelint-config-standard-scss/-/stylelint-config-standard-scss-7.0.1.tgz#4ba83fa19e1508937f7e02674e085cf94fc1a145"
@@ -4681,12 +4683,19 @@ stylelint-config-standard-scss@^7.0.1:
     stylelint-config-recommended-scss "^9.0.0"
     stylelint-config-standard "^30.0.1"
 
-stylelint-config-standard@^30.0, stylelint-config-standard@^30.0.1:
+stylelint-config-standard@^30.0.1:
   version "30.0.1"
   resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-30.0.1.tgz#a84d57c240c37f7db47023ab9d2e64c49090e1eb"
   integrity sha512-NbeHOmpRQhjZh5XB1B/S4MLRWvz4xxAxeDBjzl0tY2xEcayNhLbaRGF0ZQzq+DQZLCcPpOHeS2Ru1ydbkhkmLg==
   dependencies:
     stylelint-config-recommended "^10.0.1"
+
+stylelint-config-standard@^31.0:
+  version "31.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-31.0.0.tgz#90d94e1b43df798412e129b4b1cb4c4e56ffe64f"
+  integrity sha512-CUGAmtROCvX0YgMY2+6P9tqSkHj5z/75XxrQ8bGxvkCa1xYdGDx4poM0pa7cXc3s74/PZLJH/okxZZouRfOSGw==
+  dependencies:
+    stylelint-config-recommended "^11.0.0"
 
 stylelint-order@6.x, stylelint-order@^6.0:
   version "6.0.3"
