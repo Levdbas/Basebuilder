@@ -150,6 +150,7 @@ const webpackConfig = {
         }),
     ],
     optimization: {
+        moduleIds: 'size',
         splitChunks: {
             chunks: 'all',
             cacheGroups: {
