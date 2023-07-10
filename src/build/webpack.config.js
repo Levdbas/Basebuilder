@@ -154,6 +154,7 @@ const webpackConfig = {
         splitChunks: {
             chunks: 'all',
             cacheGroups: {
+                default: false,
                 defaultVendors: {
                     test: /[\\/]node_modules[\\/]/,
                     priority: -10,
