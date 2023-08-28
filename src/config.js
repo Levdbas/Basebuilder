@@ -29,6 +29,7 @@ userConfig = require(path.resolve(__dirname, rootPath) + userConfigPath);
 var themePath = '/';
 var assetsPath = userConfig['assetsPath'];
 var skipDependencyExtraction = false;
+var themeJsonFile = 'palette.json';
 var scssSettingsFolder = '';
 var publicPath = '';
 var externals = {};
@@ -39,6 +40,11 @@ var externals = {};
  */
 if (userConfig['themePath']) {
     themePath = userConfig['themePath'];
+}
+
+
+if (userConfig['themeJsonFile']) {
+    themeJsonFile = userConfig['themeJsonFile'];
 }
 
 /***
@@ -84,6 +90,7 @@ var config = merge(
         },
         externals: externals,
         skipDependencyExtraction: skipDependencyExtraction,
+        themeJsonFile: themeJsonFile
     },
     userConfig,
 );

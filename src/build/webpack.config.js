@@ -137,7 +137,7 @@ const webpackConfig = {
         }),
 
         new PalettePlugin({
-            output: 'theme.json',
+            output: config.themeJsonFile,
             output_prepend: '../',
             blacklist: ['transparent', 'inherit'],
             wp_theme_json: true,

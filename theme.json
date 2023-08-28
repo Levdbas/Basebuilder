@@ -1,31 +1,11 @@
 {
   "$schema": "https://schemas.wp.org/trunk/theme.json",
-  "version": 1,
+  "version": 2,
   "settings": {
-    "border": {
-      "customRadius": false
-    },
-    "spacing": {
-      "customPadding": false,
-      "customMargin": false
-    },
-    "layout": {
-      "contentSize": "1100px",
-      "wideSize": "1400px"
-    },
-    "typography": {
-      "fontFamilies": [
-        {
-          "fontFamily": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-          "slug": "system-fonts",
-          "name": "System fonts"
-        },
-        {
-          "fontFamily": "Helvetica Neue, Helvetica, Arial, sans-serif",
-          "slug": "helvetica-arial",
-          "name": "Helvetica or Arial"
-        }
-      ]
-    }
+      "layout": {
+          "contentSize": "1100px",
+          "wideSize": "1400px"
+      },
+      "typography": {}
   }
 }
