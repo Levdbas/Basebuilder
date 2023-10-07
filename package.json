@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "4.0.6",
+    "version": "4.0.7",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
