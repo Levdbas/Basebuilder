@@ -16,7 +16,7 @@ export async function checkForUpdates() {
             chalk.green(notifier.update.latest) +
             ' \nRun ' +
             chalk.cyan('yarn add ') +
-            notifier.packageName +
+            notifier.update.name +
             ' to update',
       });
    }
