@@ -34,17 +34,24 @@ compiler.hooks.invalid.tap('compile', function () {
     console.log(`\n${chalk.dim("Let's build and compile the files...")}`);
 });
 
+let hasErrors = false;
 compiler.hooks.done.tap('done', stats => {
     const messages = formatMessages(stats);
 
     if (!messages.errors.length && !messages.warnings.length) {
         console.log('\n✅ ', chalk.black.bgGreen(' Compiled successfully! \n'));
         console.log();
+
+        if (hasErrors) {
+            hasErrors = false;
+            browserSync.reload();
+        }
     }
 
     if (messages.errors.length) {
         console.log('\n❌ ', chalk.black.bgRed(' Failed to compile build. \n'));
         messages.errors.forEach(e => console.log('\n👉 ', e));
+        hasErrors = true;
         return;
     }
 
