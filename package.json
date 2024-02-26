@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "4.3.2",
+    "version": "4.4.2",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
@@ -25,7 +25,7 @@
     "dependencies": {
         "@babel/core": "^7.23",
         "@babel/preset-env": "^7.23",
-        "@wordpress/dependency-extraction-webpack-plugin": "^5.3",
+        "@wordpress/dependency-extraction-webpack-plugin": "^5.2",
         "autoprefixer": "10.4.17",
         "babel-loader": "^9.1",
         "browser-sync": "^3.0",
@@ -40,7 +40,7 @@
         "mini-css-extract-plugin": "^2.8",
         "postcss": "^8.4.35",
         "postcss-loader": "^8.1",
-        "sass": "~1.71.1",
+        "sass": "~1.70.0",
         "sass-loader": "^14.1",
         "sharp": "0.32.6",
         "style-loader": "^3.3",

@@ -46,6 +46,9 @@ const webpackConfig = {
                     loader: 'babel-loader',
                     options: {
                         cacheDirectory: true,
+                        targets: {
+                            browsers: ['defaults', 'not dead'],
+                        },
                         presets: ['@babel/preset-env'],
                     },
                 },
