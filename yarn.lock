@@ -1527,6 +1527,11 @@ async@^2.6.0:
   dependencies:
     lodash "^4.17.14"
 
+audit@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/audit/-/audit-0.0.6.tgz#fef17dd84af1dcd2a5633fd46d3b1adcb084bf3b"
+  integrity sha512-xgv3Y3RIYE00N2/xk10VLlwFd1kjc7FRaX1vC8+CsOfDRe53a06vOSkp91BOSNijZfddYum47a1Fvju/2+JPcw==
+
 autoprefixer@10.4.19:
   version "10.4.19"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.19.tgz#ad25a856e82ee9d7898c59583c1afeb3fa65f89f"
@@ -2176,23 +2181,6 @@ csstype@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
-
-d3-color@1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/d3-color/-/d3-color-1.4.1.tgz#c52002bf8846ada4424d55d97982fef26eb3bc8a"
-  integrity sha512-p2sTHSLCJI2QKunbGb7ocOh7DgTAn8IrLx21QRc/BSnodXM4sv6aLQlnfpvehFMLZEfBc6g9pH9SWQccFYfJ9Q==
-
-d3-color@^3.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/d3-color/-/d3-color-3.1.0.tgz#395b2833dfac71507f12ac2f7af23bf819de24e2"
-  integrity sha512-zg/chbXyeBtMQ1LbD/WSoW2DpC3I0mpmPdW+ynRTj/x2DAWYrIY7qeZIHidozwV24m4iavr15lNwIwLxRmOxhA==
-
-d3-hsv@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/d3-hsv/-/d3-hsv-0.1.0.tgz#c95be89b34177a29e70a0848db95d7f0261ea99b"
-  integrity sha512-HcIU73raRodnYiGDMzFbI8wyWkQtd+aAgX2sypAKnJ7UP93P9bOEhhrxWL4krcyp1ec2LFOUpvC8mFBt38YokQ==
-  dependencies:
-    d3-color "1"
 
 debug@2.6.9, debug@^2.2.0:
   version "2.6.9"
@@ -3673,6 +3661,11 @@ path-type@^5.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-5.0.0.tgz#14b01ed7aea7ddf9c7c3f46181d4d04f9c785bb8"
   integrity sha512-5HviZNaZcfqP95rwpv+1HDgUamezbqdSYTyzjTvwtJSnIH+3vnbmWsItli8OFEndS984VT55M3jduxZbX351gg==
 
+pex-color@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/pex-color/-/pex-color-2.1.0.tgz#595ef5a96f22d30e2f762294df3f9e0cacdb3302"
+  integrity sha512-N/AyN1sHmXBI4Gss9+EIEBcJB4D0j3El5qrNDJANKsJYU1ZOfiCk38rQ9XSCOfZWboBDKqLd6arNvRrytKtgkw==
+
 picocolors@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
@@ -5115,14 +5108,14 @@ wildcard@^2.0.0:
   resolved "https://registry.yarnpkg.com/wildcard/-/wildcard-2.0.1.tgz#5ab10d02487198954836b6349f74fff961e10f67"
   integrity sha512-CC1bOL87PIWSBhDcTrdeLo6eGT7mCFtrg0uIJtqJUFyK+eJnzl8A1niH56uu7KMa5XFrtiV+AQuHO3n7DsHnLQ==
 
-wordpress-palette-webpack-plugin@^3.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/wordpress-palette-webpack-plugin/-/wordpress-palette-webpack-plugin-3.0.0.tgz#4fdc79fa22dd8bbd87c898fa37458e692d566a4f"
-  integrity sha512-a2OCBMbeDS79ri1V+aLfXg1a+8b+9VeBgoyPPMPm7eWclcvhWNas0lJlOSiLbTOEiocJAeeN1QBSY6Q7k1cg5w==
+wordpress-palette-webpack-plugin@^4.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/wordpress-palette-webpack-plugin/-/wordpress-palette-webpack-plugin-4.0.0.tgz#a9c0db978692e4c470a2a4f988d46e0f78fa1504"
+  integrity sha512-lDOEzGOvTiQQHc6if7oN4MOSWq4yJfgn8VKnUV67FAE6/Rer1WoEB2n3y422KqrSBfLNy0rcIWUONfqSebnFiA==
   dependencies:
-    d3-color "^3.0"
-    d3-hsv "^0.1.0"
+    audit "^0.0.6"
     lodash "^4.17.21"
+    pex-color "^2.1.0"
     sass-export "^2.1.2"
 
 wrap-ansi@^7.0.0:

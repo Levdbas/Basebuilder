@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "4.5.1",
+    "version": "4.6.0",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
@@ -57,7 +57,7 @@
         "webpack-hot-middleware": "^2.26.1",
         "webpack-manifest-plugin": "^5.0",
         "webpack-merge": "^5.10",
-        "wordpress-palette-webpack-plugin": "^3.0"
+        "wordpress-palette-webpack-plugin": "^4.0"
     },
     "devDependencies": {
         "bootstrap": "^5.3.3",
