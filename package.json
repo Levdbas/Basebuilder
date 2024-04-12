@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "4.6.1",
+    "version": "4.7.0",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
@@ -33,17 +33,17 @@
         "commander": "^12.0",
         "copy-webpack-plugin": "^12.0",
         "core-js": "^3.36.1",
-        "css-loader": "^7.0",
+        "css-loader": "^7.1",
         "cssnano": "^6.1",
         "eslint": "^8.57",
         "image-minimizer-webpack-plugin": "^4.0.0",
         "mini-css-extract-plugin": "^2.8",
         "postcss": "^8.4.38",
         "postcss-loader": "^8.1",
-        "sass": "~1.74",
-        "sass-loader": "^14.1",
+        "sass": "~1.75",
+        "sass-loader": "^14.2",
         "sharp": "0.32.6",
-        "style-loader": "^3.3",
+        "style-loader": "^4.0",
         "stylelint-basebuilder": "^3.0",
         "svgo": "^3.2.0",
         "terser-webpack-plugin": "^5.3",
@@ -57,12 +57,12 @@
         "webpack-hot-middleware": "^2.26.1",
         "webpack-manifest-plugin": "^5.0",
         "webpack-merge": "^5.10",
-        "wordpress-palette-webpack-plugin": "^4.0"
+        "wordpress-palette-webpack-plugin": "^4.0.1"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.3",
-        "prettier": "^3.0",
-        "stylelint": "^16.0"
+        "prettier": "^3.2",
+        "stylelint": "^16.3"
     }
 }
