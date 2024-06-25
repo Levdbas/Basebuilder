@@ -35,7 +35,7 @@
         "core-js": "^3.37.1",
         "css-loader": "^7.1",
         "cssnano": "^7.0",
-        "eslint": "^9.4",
+        "eslint": "^9.5",
         "image-minimizer-webpack-plugin": "^4.0.2",
         "mini-css-extract-plugin": "^2.9",
         "postcss": "^8.4.38",
@@ -48,16 +48,16 @@
         "svgo": "^3.3.2",
         "terser-webpack-plugin": "^5.3",
         "update-notifier": "^7.0",
-        "vue": "^3.4.27",
+        "vue": "^3.4.30",
         "vue-loader": "^17.4",
-        "webpack": "^5.91",
+        "webpack": "^5.92",
         "webpack-cli": "^5.1",
         "webpack-dev-middleware": "^7.2",
         "webpack-format-messages": "^3.0.1",
         "webpack-hot-middleware": "^2.26.1",
         "webpack-manifest-plugin": "^5.0",
         "webpack-merge": "^5.10",
-        "wordpress-palette-webpack-plugin": "^4.0.1"
+        "wordpress-palette-webpack-plugin": "^4.1.0"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
