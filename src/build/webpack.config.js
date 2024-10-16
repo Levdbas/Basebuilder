@@ -79,6 +79,11 @@ const webpackConfig = {
                     },
                     {
                         loader: 'sass-loader',
+                        options: {
+                            sassOptions: { quietDeps: true },
+                            api: "modern-compiler",
+                            implementation: require("sass"),
+                        },
                     },
                 ],
             },
@@ -147,8 +152,8 @@ const webpackConfig = {
             pretty: false,
             sass: {
                 path: config.path.scssSettingsFolder,
-                files: ['_variables.scss'],
-                variables: ['brand-colors'],
+                file: '_variables.scss',
+                variables: '$brand-colors',
             },
         }),
     ],

@@ -1,6 +1,6 @@
 {
     "name": "basebuilder-config",
-    "version": "4.8.5",
+    "version": "5.0.0",
     "description": "Config and build scripts for BasePlate",
     "main": "index.js",
     "author": "Erik van der Bas",
@@ -27,7 +27,7 @@
         "@babel/preset-env": "^7.25",
         "@wordpress/dependency-extraction-webpack-plugin": "^5.9",
         "autoprefixer": "10.4.20",
-        "babel-loader": "^9.1",
+        "babel-loader": "^9.2",
         "browser-sync": "^3.0",
         "chalk": "^4.1.2",
         "commander": "^12.1",
@@ -35,7 +35,7 @@
         "core-js": "^3.38.1",
         "css-loader": "^7.1",
         "cssnano": "^7.0",
-        "eslint": "^9.9",
+        "eslint": "^9.12",
         "image-minimizer-webpack-plugin": "^4.1.0",
         "mini-css-extract-plugin": "^2.9",
         "postcss": "^8.4",
@@ -48,21 +48,21 @@
         "svgo": "^3.3.2",
         "terser-webpack-plugin": "^5.3",
         "update-notifier": "^7.3",
-        "vue": "^3.4",
+        "vue": "^3.5",
         "vue-loader": "^17.4",
-        "webpack": "^5.94",
+        "webpack": "^5.95",
         "webpack-cli": "^5.1",
         "webpack-dev-middleware": "^7.4",
         "webpack-format-messages": "^3.0.1",
         "webpack-hot-middleware": "^2.26.1",
         "webpack-manifest-plugin": "^5.0",
         "webpack-merge": "^6.0",
-        "wordpress-palette-webpack-plugin": "^4.1"
+        "wordpress-palette-webpack-plugin": "^5.0.2"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.3",
         "prettier": "^3.3",
-        "stylelint": "^16.9"
+        "stylelint": "^16.10"
     }
 }
