@@ -153,7 +153,7 @@ const webpackConfig = {
             sass: {
                 path: config.path.scssSettingsFolder,
                 file: '_variables.scss',
-                variables: '$brand-colors',
+                variable: '$brand-colors',
             },
         }),
     ],
