@@ -1,11 +1,22 @@
 const path = require('path');
 const rootPath = process.cwd();
 const { merge } = require('webpack-merge');
-const chalk = require('chalk');
 const watchMode = global.watch || false;
 var fs = require('fs');
 const options = process.argv;
 var userConfigPath = '/assets/config.json';
+
+// Dynamically import Chalk 5 and assign to global
+(async () => {
+    global.chalk = (await import('chalk')).default;
+})();
+
+// Helper to wait for chalk to be loaded
+async function waitForChalk() {
+    while (!global.chalk) {
+        await new Promise(r => setTimeout(r, 10));
+    }
+}
 
 /**
  * Checks if the config.json path is available inside the package.json config.
@@ -20,9 +31,12 @@ if (process.env.npm_package_config_userConfig) {
 try {
     require.resolve((__dirname, rootPath) + userConfigPath);
 } catch (e) {
-    console.log('\n❌ ', chalk.black.bgRed('Error locating "' + userConfigPath + '".'));
-    console.log('Did you create the config.json file in set location already?\n');
-    process.exit();
+    (async () => {
+        await waitForChalk();
+        console.log('\n❌ ', global.chalk.black.bgRed('Error locating "' + userConfigPath + '".'));
+        console.log('Did you create the config.json file in set location already?\n');
+        process.exit();
+    })();
 }
 userConfig = require(path.resolve(__dirname, rootPath) + userConfigPath);
 
@@ -51,9 +65,12 @@ if (userConfig['themeJsonFile']) {
  * Set the path to the scss folder containing the _variables.scss file
  */
 if (!userConfig['scssSettingsFolder']) {
-    console.log('\n❌ ', chalk.black.bgRed('Variable scssSettingsFolder not set in config.json'));
-    console.log('This is probably 01-settings/ or 1_common/ \n');
-    process.exit(1);
+    (async () => {
+        await waitForChalk();
+        console.log('\n❌ ', global.chalk.black.bgRed('Variable scssSettingsFolder not set in config.json'));
+        console.log('This is probably 01-settings/ or 1_common/ \n');
+        process.exit(1);
+    })();
 }
 scssSettingsFolder = path.join(assetsPath, 'styles', userConfig['scssSettingsFolder']);
 scssSettingsFolder = scssSettingsFolder.replace(/^\/+/, '');
@@ -63,9 +80,12 @@ scssSettingsFolder = scssSettingsFolder.replace(/^\/+/, '');
  * Sets up proper publicPath and removes extra slashes from the url.
  */
 if (!userConfig['rootToThemePath']) {
-    console.log('\n❌ ', chalk.black.bgRed('Variable rootToThemePath not set in config.json'));
-    console.log('This is probably /app/themes/YOURTHEMENAME/ or /wp-content/themes/YOURTHEMENAME/ \n');
-    process.exit(1);
+    (async () => {
+        await waitForChalk();
+        console.log('\n❌ ', global.chalk.black.bgRed('Variable rootToThemePath not set in config.json'));
+        console.log('This is probably /app/themes/YOURTHEMENAME/ or /wp-content/themes/YOURTHEMENAME/ \n');
+        process.exit(1);
+    })();
 }
 publicPath = 'http://localhost:3000/' + userConfig['rootToThemePath'] + '/dist/';
 publicPath = publicPath.replace(/([^:])(\/\/+)/g, '$1/');

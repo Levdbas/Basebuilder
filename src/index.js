@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
-// Update notifier..
-const chalk = require('chalk');
+// Dynamically import Chalk 5 and assign to global
+(async () => {
+    global.chalk = (await import('chalk')).default;
+})();
 
 const { program } = require('commander');
 const { version } = require('../package.json');
 const commandName = 'Basebuilder';
-
 
 // Check for updates by running the async function checkForUpdates
 // from the file helpers/updater.js
@@ -14,7 +15,6 @@ const commandName = 'Basebuilder';
     const { checkForUpdates } = await import('./helpers/updater.mjs');
     await checkForUpdates();
 })();
-
 
 program.name(commandName).description('Webpack config for WordPress projects.\n\n').option('-t, --isTestRun', 'Run in test mode').version(version);
 program
