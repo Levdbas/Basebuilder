@@ -1,4 +1,5 @@
-import packageJson from '../../package.json' assert { type: 'json' };
+import { createRequire } from "module";
+const packageJson = createRequire(import.meta.url)("../../package.json");
 import updateNotifier from 'update-notifier';
 import chalk from 'chalk';
 
@@ -11,6 +12,7 @@ export async function checkForUpdates() {
    const notifier = updateNotifier({
       pkg: packageJson,
       shouldNotifyInNpmScript: true,
+      updateCheckInterval: 1000
    });
 
    if (notifier.update !== undefined) {
