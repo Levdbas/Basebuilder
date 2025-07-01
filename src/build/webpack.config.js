@@ -80,7 +80,10 @@ const webpackConfig = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            sassOptions: { quietDeps: true },
+                            sassOptions: {
+                                quietDeps: true,
+                                silenceDeprecations: ['mixed-decls', 'global-builtin', 'import']
+                            },
                             api: "modern-compiler",
                             implementation: require("sass"),
                         },
@@ -199,11 +202,6 @@ const webpackConfig = {
                                 multipass: true,
                                 plugins: [{
                                     name: "preset-default",
-                                    params: {
-                                        overrides: {
-                                            removeViewBox: false,
-                                        },
-                                    },
                                 }]
                             },
                         },
