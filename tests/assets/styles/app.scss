@@ -6,6 +6,7 @@ $red: red;
 
 
 //@import "ie-legacy";
+@import "01-settings/functions";
 @import "01-settings/variables";
 @import "01-settings/fonts";
 @import "../fonts/iconfont/icomoon";
@@ -14,5 +15,6 @@ $red: red;
 
 body{
 	font-family: "Montserrat";
-   background-color: blue;
+   background-color: blue;	
+   --font-size-h1: #{$font-size-h1-clamp};
 }

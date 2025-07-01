@@ -14,3 +14,6 @@ $brand-colors: (
 	"gray": #f3f3f3,
 	"yellow": $highlight1
 ) !default;
+
+
+$font-size-h1-clamp: calculate-clamp(28px, 40px, 2vw) !default;
