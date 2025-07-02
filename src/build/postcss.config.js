@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 		require('cssnano')({
 			// use the safe preset so that it doesn't
 			// mutate or remove code from our css
-			preset: ['default', { discardComments: { removeAll: true } }],
+			preset: ['default', { discardComments: { removeAll: true }, calc: false }],
 		}),
 	);
 }
