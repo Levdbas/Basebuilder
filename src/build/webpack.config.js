@@ -82,7 +82,7 @@ const webpackConfig = {
                         options: {
                             sassOptions: {
                                 quietDeps: true,
-                                silenceDeprecations: ['mixed-decls', 'global-builtin', 'import']
+                                silenceDeprecations: ['global-builtin', 'import']
                             },
                             api: "modern-compiler",
                             implementation: require("sass"),
