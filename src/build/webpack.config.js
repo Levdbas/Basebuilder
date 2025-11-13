@@ -200,9 +200,24 @@ const webpackConfig = {
                         options: {
                             encodeOptions: {
                                 multipass: true,
-                                plugins: [{
-                                    name: "preset-default",
-                                }]
+                                plugins: [
+                                    {
+                                        name: "preset-default",
+                                        params: {
+                                            overrides: {
+                                                cleanupIds: false,
+                                                removeUselessDefs: false,
+                                            },
+                                        },
+                                    },
+                                    {
+                                        name: "cleanupIds",
+                                        params: {
+                                            minify: false,
+                                            preservePrefixes: ['svg-'],
+                                        }
+                                    }
+                                ]
                             },
                         },
                     },
