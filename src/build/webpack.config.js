@@ -91,6 +91,13 @@ const webpackConfig = {
                 ],
             },
             {
+                test: /fill-.*\.(png|jpg|gif|svg)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: devMode ? 'images/[name][ext]' : 'images/[name].[contenthash][ext]',
+                },
+            },
+            {
                 test: /\.(png|jpg|gif|svg)$/i,
                 type: 'asset',
                 generator: {
@@ -214,7 +221,7 @@ const webpackConfig = {
                                         name: "cleanupIds",
                                         params: {
                                             minify: false,
-                                            preservePrefixes: ['svg-'],
+                                            preservePrefixes: ['fill-'],
                                         }
                                     }
                                 ]
