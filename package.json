@@ -8,7 +8,7 @@
     "bin": "./src/index.js",
     "homepage": "https://github.com/Levdbas/Basebuilder",
     "engines": {
-        "node": ">=18.17"
+        "node": ">=20.9"
     },
     "files": [
         "src",
@@ -25,18 +25,18 @@
     "dependencies": {
         "@babel/core": "^7.29",
         "@babel/preset-env": "^7.29",
-        "@wordpress/dependency-extraction-webpack-plugin": "^6.39",
+        "@wordpress/dependency-extraction-webpack-plugin": "^6.41",
         "autoprefixer": "^10.4",
         "babel-loader": "^10.0",
         "browser-sync": "^3.0",
         "chalk": "^5.6",
         "commander": "^14.0",
-        "copy-webpack-plugin": "^13.0",
+        "copy-webpack-plugin": "^14.0",
         "core-js": "^3.48",
         "css-loader": "^7.1",
         "cssnano": "^7.1",
-        "eslint": "^9.39",
-        "image-minimizer-webpack-plugin": "^4.1.4",
+        "eslint": "^10.0",
+        "image-minimizer-webpack-plugin": "^5.0",
         "mini-css-extract-plugin": "^2.10",
         "postcss": "^8.5",
         "postcss-loader": "^8.2",
@@ -50,7 +50,7 @@
         "update-notifier": "^7.3",
         "vue": "^3.5",
         "vue-loader": "^17.4",
-        "webpack": "^5.104",
+        "webpack": "^5.105",
         "webpack-cli": "^6.0",
         "webpack-dev-middleware": "^7.4",
         "webpack-format-messages": "^3.0.1",
@@ -63,6 +63,6 @@
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.8",
         "prettier": "^3.8",
-        "stylelint": "^16.26"
+        "stylelint": "^17.4"
     }
 }
