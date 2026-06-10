@@ -105,7 +105,7 @@ const webpackConfig = {
                 },
             },
             {
-                test: /\.(woff|woff2|eot|ttf)$/,
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
                 type: 'asset/resource',
                 generator: {
                     filename: devMode ? 'fonts/[name][ext]' : 'fonts/[name].[contenthash][ext]',
