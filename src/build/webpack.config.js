@@ -105,7 +105,7 @@ const webpackConfig = {
                 },
             },
             {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                test: /\.(woff|woff2|eot|ttf)$/,
                 type: 'asset/resource',
                 generator: {
                     filename: devMode ? 'fonts/[name][ext]' : 'fonts/[name].[contenthash][ext]',
@@ -214,12 +214,14 @@ const webpackConfig = {
                                             overrides: {
                                                 cleanupIds: false,
                                                 removeUselessDefs: false,
+                                                removeHiddenElems: false,
                                             },
                                         },
                                     },
                                     {
                                         name: "cleanupIds",
                                         params: {
+                                            remove: false,
                                             minify: false,
                                             preservePrefixes: ['fill-'],
                                         }
