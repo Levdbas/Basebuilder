@@ -1,5 +1,7 @@
 # BaseBuilder
 
+[![npm version](https://img.shields.io/npm/v/basebuilder-config.svg)](https://www.npmjs.com/package/basebuilder-config)
+
 BaseBuilder is a Webpack config in the form of an NPM module that can handle most WP projects.
 Works best in combination with [BasePlate](https://github.com/Levdbas/BasePlate 'Check out BasePlate') WP starter theme
 
