@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.8.1](https://github.com/Levdbas/Basebuilder/compare/6.8.0...6.8.1) (2026-10-09)
+
+
+### ⚙️ Miscellaneous Tasks
+
+* update postcss to version 8.5.26 in package.json and yarn.lock ([76ae620](https://github.com/Levdbas/Basebuilder/commit/76ae620f90911f062512d9fee56e924c9841bc0b))
+
 ## 6.8.0 (2026-10-07)
 
 
