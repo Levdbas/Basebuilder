@@ -1,5 +1,18 @@
 # Changelog
 
+## [6.8.1](https://github.com/Levdbas/Basebuilder/compare/6.8.0...6.8.1) (2026-10-12)
+
+
+### 🐛 Bug Fixes
+
+* **ci:** use yarn install instead of npm ci in publish workflow ([4307a39](https://github.com/Levdbas/Basebuilder/commit/4307a39605925e50cedaa04d3644f49b1cf5f701))
+
+
+### ⚙️ Miscellaneous Tasks
+
+* update packages ([a9aca80](https://github.com/Levdbas/Basebuilder/commit/a9aca801d2380409c98d537a31dfd7fbf9db1a37))
+* update postcss to version 8.5.26 in package.json and yarn.lock ([76ae620](https://github.com/Levdbas/Basebuilder/commit/76ae620f90911f062512d9fee56e924c9841bc0b))
+
 ## 6.8.0 (2026-10-07)
 
 
