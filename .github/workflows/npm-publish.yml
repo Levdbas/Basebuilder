@@ -16,5 +16,5 @@ jobs:
                   node-version: 'lts/*'
                   registry-url: 'https://registry.npmjs.org'
                   package-manager-cache: false # never use caching in release builds
-            - run: npm ci
+            - run: yarn install --frozen-lockfile
             - run: npm publish
