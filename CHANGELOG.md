@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.8.3](https://github.com/Levdbas/Basebuilder/compare/6.8.2...6.8.3) (2026-10-13)
+
+
+### 🐛 Bug Fixes
+
+* **package:** add repository field to package.json ([fa2ff70](https://github.com/Levdbas/Basebuilder/commit/fa2ff70d34a85669588ce36f982c9b286cedd2fb))
+
 ## [6.8.2](https://github.com/Levdbas/Basebuilder/compare/6.8.1...6.8.2) (2026-10-13)
 
 
