@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.8.2](https://github.com/Levdbas/Basebuilder/compare/6.8.1...6.8.2) (2026-10-13)
+
+
+### 🐛 Bug Fixes
+
+* **ci:** remove unused registry-url from npm publish workflow ([5740d3f](https://github.com/Levdbas/Basebuilder/commit/5740d3f1f0ab926a05bd475d22c76a08c496aed9))
+
 ## [6.8.1](https://github.com/Levdbas/Basebuilder/compare/6.8.0...6.8.1) (2026-10-12)
 
 
